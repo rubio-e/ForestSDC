@@ -11,7 +11,7 @@
 #' @param h A numeric vector representing tree heights.
 #' @param sp A factor or character vector representing tree species.
 #' @param r A numeric value representing the radius of the circular plot (must be positive).
-#' @param data (Optional) A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
+#' @param data A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
 #'
 #' @return A data frame with calculated nearest neighbor indices for each tree.
 #' Columns include:
@@ -33,27 +33,38 @@
 #' h <- runif(100, min = 2, max = 40)
 #' plot <- rep("P01", 100)
 #' dataP01 <- data.frame(plot, x, y, sp, d, h)
-#' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = 50)
+#' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = 50, data = dataP01)
 #'
 #' @export
-nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
+nnss_circle <- function(plot, x, y, sp, d, h, r, data) {
+
+  plot <- as.factor(deparse(substitute(plot)))
+  x <- deparse(substitute(x))
+  y <- deparse(substitute(y))
+  sp <- as.factor(deparse(substitute(sp)))
+  d <- deparse(substitute(d))
+  h <- deparse(substitute(h))
+
   # Validate input
   if (!is.null(data)) {
     required_cols <- c("plot", "x", "y", "sp", "d", "h")
     if (!all(required_cols %in% colnames(data))) {
       stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
     }
-    plot <- data$plot
-    x <- data$x
-    y <- data$y
-    sp <- data$sp
-    d <- data$d
-    h <- data$h
+    data1 <-
+      data.frame(
+        plot = data[, plot],
+        x = data[, x],
+        y = data[, y],
+        sp = data[, sp],
+        d = data[, d],
+        h = data[, h]
+      )
   } else {
     if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
       stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
     }
-    data <- data.frame(plot, x, y, sp, d, h)
+    data1 <- data.frame(plot, x, y, sp, d, h)
   }
 
   if (!is.numeric(r) || r <= 0) {
@@ -61,7 +72,7 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
   }
 
   # Check for duplicate rows
-  duplicates <- data |>
+  duplicates <- data1 |>
     dplyr::add_count(plot, x, y) |>
     dplyr::filter(n > 1) |>
     dplyr::distinct()
@@ -72,7 +83,7 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
   }
 
   # Calculate nearest neighbor indices using the external function `nnss5c`
-  nnss_results <- data |>
+  nnss_results <- data1 |>
     dplyr::group_by(plot) |>
     dplyr::mutate(i = nnss5c(x = x, y = y, sp = sp, d = d, h = h, r = r)) |>
     tidyr::separate(i, into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")

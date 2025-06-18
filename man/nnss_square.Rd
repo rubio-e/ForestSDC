@@ -4,7 +4,7 @@
 \alias{nnss_square}
 \title{Calculate Nearest Neighbor Indices for Square Plots}
 \usage{
-nnss_square(plot, x, y, sp, d, h, xmax, ymax, data = NULL)
+nnss_square(plot, x, y, sp, d, h, xmax, ymax, data)
 }
 \arguments{
 \item{plot}{A numeric or character variable representing the plot identifier.}
@@ -23,7 +23,7 @@ nnss_square(plot, x, y, sp, d, h, xmax, ymax, data = NULL)
 
 \item{ymax}{A numeric value representing the maximum y-coordinate value for the plot.}
 
-\item{data}{(Optional) A data frame containing all the required columns (\code{plot}, \code{x}, \code{y}, \code{sp}, \code{d}, \code{h}).}
+\item{data}{A data frame containing all the required columns (\code{plot}, \code{x}, \code{y}, \code{sp}, \code{d}, \code{h}).}
 }
 \value{
 A data frame with calculated nearest neighbor indices for each tree.
