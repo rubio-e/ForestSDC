@@ -56,12 +56,12 @@ data_circle <- data.frame(
 )
 
 result_circle <- nnss_circle(
-  plot = data_circle$plot,
-  x = data_circle$x,
-  y = data_circle$y,
-  sp = data_circle$sp,
-  d = data_circle$d,
-  h = data_circle$h,
+  plot = plot,
+  x = x,
+  y = y,
+  sp = sp,
+  d = d,
+  h = h,
   r = 50,
   data = data_circle
 )
@@ -84,12 +84,12 @@ data_square <- data.frame(
 )
 
 result_square <- nnss_square(
-  plot = data_square$plot,
-  x = data_square$x,
-  y = data_square$y,
-  sp = data_square$sp,
-  d = data_square$d,
-  h = data_square$h,
+  plot = plot,
+  x = x,
+  y = y,
+  sp = sp,
+  d = d,
+  h = h,
   xmax = 50,
   ymax = 50,
   data = data_square
