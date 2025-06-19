@@ -4,7 +4,7 @@
 \name{ForestSDC}
 \alias{ForestSDC-package}
 \alias{ForestSDC}
-\title{ForestSDC: Forest stand Structure, tree Diversity and species Composittion.}
+\title{ForestSDC: Forest stand Structure, tree Diversity and species Composition.}
 \description{
 The \code{ForestSDC} package is a comprehensive tool set for analyzing data from forest inventories
 and permanent research plots. It includes functions to estimate structural indices,
