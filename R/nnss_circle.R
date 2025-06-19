@@ -36,21 +36,32 @@
 #' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = 50, data = dataP01)
 #'
 #' @export
-nnss_circle <- function(plot, x, y, sp, d, h, r, data) {
-
-  plot <- as.factor(deparse(substitute(plot)))
-  x <- deparse(substitute(x))
-  y <- deparse(substitute(y))
-  sp <- as.factor(deparse(substitute(sp)))
-  d <- deparse(substitute(d))
-  h <- deparse(substitute(h))
-
+nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
   # Validate input
-  if (!is.null(data)) {
+  if (is.null(data)) {
+    if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
+      stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
+    }
+    data1 <-
+      data.frame(
+        plot = plot,
+        x = x,
+        y = y,
+        sp = sp,
+        d = d,
+        h = h
+      )
+  } else {
     required_cols <- c("plot", "x", "y", "sp", "d", "h")
     if (!all(required_cols %in% colnames(data))) {
       stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
     }
+    plot <- deparse(substitute(plot))
+    x <- deparse(substitute(x))
+    y <- deparse(substitute(y))
+    sp <- deparse(substitute(sp))
+    d <- deparse(substitute(d))
+    h <- deparse(substitute(h))
     data1 <-
       data.frame(
         plot = data[, plot],
@@ -60,11 +71,6 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data) {
         d = data[, d],
         h = data[, h]
       )
-  } else {
-    if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
-      stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
-    }
-    data1 <- data.frame(plot, x, y, sp, d, h)
   }
 
   if (!is.numeric(r) || r <= 0) {

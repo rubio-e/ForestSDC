@@ -4,7 +4,7 @@
 \alias{nnss_circle}
 \title{Calculate Nearest Neighbor Indices for Circular Plots}
 \usage{
-nnss_circle(plot, x, y, sp, d, h, r, data)
+nnss_circle(plot, x, y, sp, d, h, r, data = NULL)
 }
 \arguments{
 \item{plot}{A numeric or character variable representing the plot identifier.}

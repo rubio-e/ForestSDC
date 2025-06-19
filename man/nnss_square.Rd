@@ -4,7 +4,7 @@
 \alias{nnss_square}
 \title{Calculate Nearest Neighbor Indices for Square Plots}
 \usage{
-nnss_square(plot, x, y, sp, d, h, xmax, ymax, data)
+nnss_square(plot, x, y, sp, d, h, xmax, ymax, data = NULL)
 }
 \arguments{
 \item{plot}{A numeric or character variable representing the plot identifier.}
