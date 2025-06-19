@@ -1,4 +1,4 @@
-#' ForestSDC: Forest stand Structure, tree Diversity and species Composition.
+#' ForestSDC: Forest stand Structure, tree Diversity, and species Composition.
 #'
 #' The `ForestSDC` package is a comprehensive tool set for analyzing data from forest inventories
 #' and permanent research plots. It includes functions to estimate structural indices,
