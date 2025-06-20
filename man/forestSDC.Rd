@@ -4,7 +4,7 @@
 \name{ForestSDC}
 \alias{ForestSDC-package}
 \alias{ForestSDC}
-\title{ForestSDC: Forest stand Structure, tree Diversity, and species Composition.}
+\title{ForestSDC: Forest stand Structure, tree Diversity, and species Composition}
 \description{
 The \code{ForestSDC} package is a comprehensive tool set for analyzing data from forest inventories
 and permanent research plots. It includes functions to estimate structural indices,
@@ -16,7 +16,7 @@ Key features include:
 \itemize{
 \item Structural indices such as Shannon's diversity, Simpson's complement, and species richness.
 \item Spatial analysis using nearest-neighbor methods.
-\item Customizable tools for biodiversity and forest dynamics evaluation.
+\item Customization tools for biodiversity and forest dynamics evaluation.
 }
 
 The package leverages \code{dplyr} and \code{tidyr} for data manipulation and \code{FNN} for efficient
