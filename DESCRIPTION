@@ -1,6 +1,6 @@
 Package: ForestSDC
 Type: Package
-Title: Forest stand Structure, tree Diversity, and species Composition.
+Title: Forest stand Structure, tree Diversity, and species Composition
 Version: 0.1.0
 Author: Ernesto Rubio
 Maintainer: Ernesto Rubio <ernestorub@gmail.com>
