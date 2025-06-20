@@ -31,9 +31,9 @@ Columns include:
 \item \code{Mi}: Mixture index
 \item \code{dDomi}: Dominance based on diameter
 \item \code{hDomi}: Dominance based on height
-\item \code{dDif}: Diameter difference
-\item \code{hDif}: Height difference
-\item \code{NN1}: Distance to the nearest neighbor
+\item \code{dDif}: Diameter differentiation
+\item \code{hDif}: Height differentiation
+\item \code{NN1}: Nearest-neighbor edge-correction
 }
 }
 \description{
