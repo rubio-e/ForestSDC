@@ -25,15 +25,16 @@
 #' @md
 #'
 #' @examples
-#' set.seed(42)
-#' x <- runif(100, min = 1, max = 99)
-#' y <- runif(100, min = 1, max = 99)
+#' plot_radius <- 17.84124 # for a 1000 m2 plot
+#' azi <- runif(100, min = 0, max = 360)
+#' dis <- runif(100, min = 1, max = plot_radius)
+#' df_xy <- coordxy(azi, dis, plot_radius*2)
 #' sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
 #' d <- runif(100, min = 7.5, max = 60)
 #' h <- runif(100, min = 2, max = 40)
 #' plot <- rep("P01", 100)
-#' dataP01 <- data.frame(plot, x, y, sp, d, h)
-#' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = 50, data = dataP01)
+#' dataP02 <- data.frame(plot, df_xy, sp, d, h)
+#' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP02)
 #'
 #' @export
 nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
