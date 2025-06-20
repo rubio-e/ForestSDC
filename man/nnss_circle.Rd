@@ -48,7 +48,7 @@ dis <- runif(100, min = 1, max = plot_radius)
 df_xy <- coordxy(azi, dis, plot_radius*2)
 sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
 d <- runif(100, min = 7.5, max = 60)
-h <- runif(100, min = 2, max = 40)
+h <- 5.4349 + d * 0.4219
 plot <- rep("P01", 100)
 dataP02 <- data.frame(plot, df_xy, sp, d, h)
 nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP02)

@@ -49,7 +49,7 @@ x <- runif(100, min = 1, max = 50)
 y <- runif(100, min = 1, max = 50)
 sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
 d <- runif(100, min = 7.5, max = 60)
-h <- runif(100, min = 2, max = 40)
+h <- 5.4349 + d * 0.4219
 plot <- rep("P01", 100)
 dataP01 <- data.frame(plot, x, y, sp, d, h)
 nnss_square(plot = plot, x = x, y = y, sp = sp, d = d, h = h, xmax = 50, ymax = 50, data = dataP01)
