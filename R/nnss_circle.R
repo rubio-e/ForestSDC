@@ -19,9 +19,9 @@
 #'   - `Mi`: Mixture index
 #'   - `dDomi`: Dominance based on diameter
 #'   - `hDomi`: Dominance based on height
-#'   - `dDif`: Diameter difference
-#'   - `hDif`: Height difference
-#'   - `NN1`: Distance to the nearest neighbor
+#'   - `dDif`: Diameter differentiation
+#'   - `hDif`: Height differentiation
+#'   - `NN1`: Nearest-neighbor edge-correction
 #' @md
 #'
 #' @examples
