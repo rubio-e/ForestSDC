@@ -1,4 +1,4 @@
-#' ForestSDC: Forest stand Structure, tree Diversity, and species Composition.
+#' ForestSDC: Forest stand Structure, tree Diversity, and species Composition
 #'
 #' The `ForestSDC` package is a comprehensive tool set for analyzing data from forest inventories
 #' and permanent research plots. It includes functions to estimate structural indices,
@@ -8,7 +8,7 @@
 #' Key features include:
 #' - Structural indices such as Shannon's diversity, Simpson's complement, and species richness.
 #' - Spatial analysis using nearest-neighbor methods.
-#' - Customizable tools for biodiversity and forest dynamics evaluation.
+#' - Customization tools for biodiversity and forest dynamics evaluation.
 #'
 #' The package leverages `dplyr` and `tidyr` for data manipulation and `FNN` for efficient
 #' nearest-neighbor calculations.
