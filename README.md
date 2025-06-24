@@ -74,7 +74,7 @@ head(dataP01)
 library(ggplot2)
 library(dplyr)
 library(ggforce)
-dataP02 %>%
+dataP01 %>%
   ggplot()+
   labs(title = "Circular plot", caption = "Different color are given by the species")+
   geom_point(aes(x,y, color = sp))+
