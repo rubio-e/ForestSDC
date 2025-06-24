@@ -135,7 +135,7 @@ shannon(species)
 
 ## Licencia
 
-Este paquete está disponible bajo la licencia MIT.
+Este paquete está disponible bajo la licencia GPL >= 3.
 
 ## Cómo citar
 
