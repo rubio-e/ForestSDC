@@ -1,4 +1,4 @@
-# ForestSDC < <img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200" /></a>
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200" /></a>
 
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
 <!-- badges: start -->
@@ -135,7 +135,7 @@ shannon(species)
 
 ## Licencia
 
-Este paquete está disponible bajo la licencia MIT.
+Este paquete está disponible bajo la licencia GPL >= 3.
 
 ## Cómo citar
 
