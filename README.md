@@ -1,7 +1,7 @@
 # ForestSDC
 
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
-![logo](manual/figures/LOGO_FORESTSDC.png) 
+![logo](man/figures/LOGO_FORESTSDC.png) 
 
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/rubio-e/ForestSDC)
 
