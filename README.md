@@ -1,3 +1,4 @@
+<img src='man/figures/LOGO_FORESTSDC.png' align="right" width="140" /></a>
 # ForestSDC
 
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
