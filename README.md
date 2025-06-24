@@ -109,38 +109,30 @@ head(test002)
 ## 6 P01    10.5 28.5  Abies   38.5  21.7  0.5   0.5   0.75  0.75 0.413 0.315     1
 ```
 
-
-
 ### `nnss_square()`: Parcelas cuadradas
-
-```r
-set.seed(42)
-
-data_square <- data.frame(
-  plot = rep("P02", 100),
-  x = runif(100, 0, 50),
-  y = runif(100, 0, 50),
-  sp = sample(c("Pinus", "Quercus"), 100, replace = TRUE),
-  d = runif(100, 7.5, 60),
-  h = runif(100, 2, 40)
-)
-
-result_square <- nnss_square(
-  plot = plot,
-  x = x,
-  y = y,
-  sp = sp,
-  d = d,
-  h = h,
-  xmax = 50,
-  ymax = 50,
-  data = data_square
-)
-
-head(result_square)
+```{r}
+ntrees <- 200
+x <- runif(ntrees, min = 1, max = 50)
+y <- runif(ntrees, min = 1, max = 50)
+sp <- factor(sample(c("Pinus", "Quercus", "Abies"), 100, replace = TRUE))
+d <- runif(ntrees, min = 7.5, max = 60)
+h <- 5.4349 + d * 0.4219
+plot <- rep("P02", ntrees)
+dataP02 <- data.frame(plot, x, y, sp, d, h)
+test002 <-nnss_square(plot = plot, x = x, y = y, sp = sp, d = d, h = h, xmax = 50, ymax = 50, data = dataP02)
+head(test002)
 ```
 
----
+```{r}
+test002$NN1 <- as.factor(test002$NN1)
+test002 %>%
+  ggplot()+
+  geom_point(aes(x,y, color = NN1))+
+  geom_rect(aes(xmin = 5, xmax = 45, ymin = 5, ymax = 45), color="black", alpha=0)+
+  geom_rect(aes(xmin = 0, xmax = 50, ymin = 0, ymax = 50), color="black", alpha=0)+
+  coord_fixed()+
+  theme_minimal()
+```
 
 ## 📈 Ejemplos adicionales
 
