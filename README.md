@@ -41,35 +41,43 @@ shannon(especies)
 
 ## 📊 Funciones destacadas: Análisis de Vecinos más Cercanos
 
+### Simulación de una base de datos
+
+Se crea una base de datos para un sitio circular de 1000 metros cuadrados.
+
+```r
+set.seed(42)
+plot_radius <- 17.84124 # for a 1000 m2 plot
+azi <- runif(100, min = 0, max = 360)
+dis <- runif(100, min = 1, max = plot_radius)
+df_xy <- coordxy(azi, dis, plot_radius*2)
+sp <- factor(sample(c("Pinus", "Quercus", "Abies"), 100, replace = TRUE))
+d <- runif(100, min = 7.5, max = 60)
+h <- 5.4349 + d * 0.4219
+plot <- rep("P01", 100)
+dataP01 <- data.frame(plot, df_xy, sp, d, h)
+head(dataP01)
+```
+### Graficar la posición del arbolado utilizando las librerías `ggplot2`, `dplyr` y `ggforce`
+```r
+library(ggplot2)
+library(dplyr)
+library(ggforce)
+dataP02 %>%
+  ggplot()+
+  labs(title = "Circular plot", caption = "Different color are given by the species")+
+  geom_point(aes(x,y, color = sp))+
+  geom_circle(aes(x0 = plot_radius, y0 = plot_radius, r = plot_radius)) +
+  coord_fixed()+
+  theme_bw()+
+  theme_minimal()
+```
+
 ### `nnss_circle()`: Parcelas circulares
 
 Calcula índices espaciales para árboles dentro de una parcela circular.
 
-```r
-set.seed(42)
 
-data_circle <- data.frame(
-  plot = rep("P01", 100),
-  x = runif(100, 0, 99),
-  y = runif(100, 0, 99),
-  sp = sample(c("Pinus", "Quercus"), 100, replace = TRUE),
-  d = runif(100, 10, 40),
-  h = runif(100, 5, 30)
-)
-
-result_circle <- nnss_circle(
-  plot = plot,
-  x = x,
-  y = y,
-  sp = sp,
-  d = d,
-  h = h,
-  r = 50,
-  data = data_circle
-)
-
-head(result_circle)
-```
 
 ### `nnss_square()`: Parcelas cuadradas
 
