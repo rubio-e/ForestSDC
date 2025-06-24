@@ -1,5 +1,4 @@
-# ForestSDC  <img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200">
-# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/LOGO_FORESTSDC.png' align="right" width="140" /></a>
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200" /></a>
 
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
 <!-- badges: start -->
