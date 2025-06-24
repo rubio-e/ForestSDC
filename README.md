@@ -37,8 +37,6 @@ especies <- c("P. patula", "A. religiosa", "P. patula", "Q. castanea")
 shannon(especies)
 ```
 
----
-
 ## 📊 Funciones destacadas: Análisis de Vecinos más Cercanos
 
 ### Simulación de una base de datos
