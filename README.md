@@ -1,4 +1,4 @@
-# ForestSDC  <img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200" >
+# ForestSDC  <img src='man/figures/LOGO_FORESTSDC.png' align="right" width="200">
 
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
 <!-- badges: start -->
