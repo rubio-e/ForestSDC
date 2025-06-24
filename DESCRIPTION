@@ -4,8 +4,7 @@ Title: Forest stand Structure, tree Diversity, and species Composition
 Version: 0.1.0
 Author: Ernesto Rubio
 Maintainer: Ernesto Rubio <ernestorub@gmail.com>
-Description: The package provides tools for forest inventory analysis, including functions to calculate structural diversity indices, biodiversity metrics, and Nearest Neighbour Summary Statistics. It is designed to support 
-    researchers and practitioners in assessing forest dynamics, ecosystem health, and biodiversity.
+Description: The package provides tools for forest inventory analysis, including functions to calculate structural diversity indices, biodiversity metrics, and Nearest Neighbour Summary Statistics. It is designed to support researchers and practitioners in assessing forest dynamics, ecosystem health, and biodiversity.
 Imports: 
     FNN,
     dplyr,
