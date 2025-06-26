@@ -90,8 +90,8 @@ dataP01 %>%
 Calcula índices espaciales para árboles dentro de una parcela circular.
 
 ```r
-test002 <- nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP02)
-head(test002)
+test001 <- nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP01)
+head(test001)
 ```
 
 ```r
