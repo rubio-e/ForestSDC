@@ -53,24 +53,25 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
         h = h
       )
   } else {
-    required_cols <- c("plot", "x", "y", "sp", "d", "h")
-    if (!all(required_cols %in% colnames(data))) {
-      stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
-    }
+    # required_cols <- c("plot", "x", "y", "sp", "d", "h")
+    # if (!all(required_cols %in% colnames(data))) {
+    #   stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
+    # }
     plot <- deparse(substitute(plot))
     x <- deparse(substitute(x))
     y <- deparse(substitute(y))
     sp <- deparse(substitute(sp))
     d <- deparse(substitute(d))
     h <- deparse(substitute(h))
+
     data1 <-
       data.frame(
-        plot = data[, plot],
-        x = data[, x],
-        y = data[, y],
-        sp = data[, sp],
-        d = data[, d],
-        h = data[, h]
+        plot = data[[plot]],
+        x = data[[x]],
+        y = data[[y]],
+        sp = data[[sp]],
+        d = data[[d]],
+        h = data[[h]]
       )
   }
 
