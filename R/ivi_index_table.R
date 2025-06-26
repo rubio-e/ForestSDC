@@ -16,18 +16,33 @@
 #'
 #' @examples
 #' # ivi_index_table(sp, xha, plot, data = mydata, plot_area = 400)
-ivi_index_table <- function(sp, xha, plot, data, plot_area) {
-  # Convert arguments to character strings (non-standard evaluation)
-  sp_col <- deparse(substitute(sp))
-  xha_col <- deparse(substitute(xha))
-  plot_col <- deparse(substitute(plot))
+ivi_index_table <- function(sp, xha, plot, data = NULL, plot_area) {
 
-  # Prepare data frame
-  df <- data.frame(
-    sp = as.character(data[[sp_col]]),
-    xha = as.numeric(data[[xha_col]]),
-    plot = as.character(data[[plot_col]])
-  )
+  if (is.null(data)) {
+    if (length(unique(c(length(plot), length(sp), length(xha)))) > 1) {
+      stop("All input vectors (plot, sp, xha) must have the same length.")
+    }
+
+    df <-
+      data.frame(
+        sp = sp,
+        xha = xha,
+        plot = plot
+      )
+  } else {
+
+    # Convert arguments to character strings (non-standard evaluation)
+    sp_col <- deparse(substitute(sp))
+    xha_col <- deparse(substitute(xha))
+    plot_col <- deparse(substitute(plot))
+
+    # Prepare data frame
+    df <- data.frame(
+      sp = as.character(data[[sp_col]]),
+      xha = as.numeric(data[[xha_col]]),
+      plot = as.character(data[[plot_col]])
+    )
+  }
 
   # Adjust area for total number of plots
   total_area <- plot_area * length(unique(df$plot))
@@ -74,5 +89,8 @@ ivi_index_table <- function(sp, xha, plot, data, plot_area) {
     dplyr::select(sp, Nha, Xha, Plots, Abundance, Dominance, Frequency, IVI) %>%
     dplyr::arrange(dplyr::desc(IVI))
 
+  table$rank <- 1:nrow(table)
+
   return(as.data.frame(table))
+
 }

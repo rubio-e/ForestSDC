@@ -4,7 +4,7 @@
 \alias{ivi_index_table}
 \title{Calculate IVI Index Table}
 \usage{
-ivi_index_table(sp, xha, plot, data, plot_area)
+ivi_index_table(sp, xha, plot, data = NULL, plot_area)
 }
 \arguments{
 \item{sp}{A column in `data` indicating species names.}
