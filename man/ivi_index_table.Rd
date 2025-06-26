@@ -27,5 +27,5 @@ compute the species frequency based on the number of plots. So it is recommended
 per area and not just for individual plots.
 }
 \examples{
-# ivi_index_table(sp, d, plot, data = mydata, plot_area = 400)
+# ivi_index_table(sp, xha, plot, data = mydata, plot_area = 400)
 }

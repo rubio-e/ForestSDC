@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' # ivi_index_table(sp, d, plot, data = mydata, plot_area = 400)
+#' # ivi_index_table(sp, xha, plot, data = mydata, plot_area = 400)
 ivi_index_table <- function(sp, xha, plot, data, plot_area) {
   # Convert arguments to character strings (non-standard evaluation)
   sp_col <- deparse(substitute(sp))
