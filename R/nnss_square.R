@@ -88,7 +88,7 @@ nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
     # Calculate Nearest Neighbor indices using an external function `nnss5q`
     nnss_alli <- data1 |>
       dplyr::group_by(plot) |>
-      dplyr::mutate(i = nnss5q(
+      dplyr::mutate(df_nnss = nnss5q(
         x = x,
         y = y,
         sp = sp,
@@ -100,7 +100,7 @@ nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
 
     # Separate the calculated indices into individual columns
     nnew <- nnss_alli |>
-      tidyr::separate(i, into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
+      tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
 
     # Convert the new columns to numeric
     cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")

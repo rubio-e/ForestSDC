@@ -4,12 +4,12 @@
 \alias{ivi_index_table}
 \title{Calculate IVI Index Table}
 \usage{
-ivi_index_table(sp, xha, plot, data = NULL, plot_area)
+ivi_index_table(sp, x, plot, data = NULL, plot_area)
 }
 \arguments{
 \item{sp}{A column in `data` indicating species names.}
 
-\item{xha}{A numeric column used for dominance calculation (e.g., basal area or crown area).}
+\item{x}{A numeric column used for dominance calculation (e.g., basal area or crown area).}
 
 \item{plot}{A factor or character column indicating plot identifiers.}
 
@@ -27,5 +27,5 @@ compute the species frequency based on the number of plots. So it is recommended
 per area and not just for individual plots.
 }
 \examples{
-# ivi_index_table(sp, xha, plot, data = mydata, plot_area = 400)
+# ivi_index_table(sp, x, plot, data = mydata, plot_area = 400)
 }

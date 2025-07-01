@@ -16,8 +16,6 @@
 #
 # y <- runif(100, min = 1, max = 99)
 #
-# require(forstr)
-#
 # nnss <- w_id(x, y)
 #
 # d <- runif(100, min = 7.5, max = 40)

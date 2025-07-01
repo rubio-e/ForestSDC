@@ -6,7 +6,7 @@
 #' per area and not just for individual plots.
 #'
 #' @param sp A column in `data` indicating species names.
-#' @param xha A numeric column used for dominance calculation (e.g., basal area or crown area).
+#' @param x A numeric column used for dominance calculation (e.g., basal area or crown area).
 #' @param plot A factor or character column indicating plot identifiers.
 #' @param data A data frame containing all the input columns.
 #' @param plot_area Numeric value representing the area of the individual plots (e.g., 10000 m²).
@@ -15,31 +15,31 @@
 #' @export
 #'
 #' @examples
-#' # ivi_index_table(sp, xha, plot, data = mydata, plot_area = 400)
-ivi_index_table <- function(sp, xha, plot, data = NULL, plot_area) {
+#' # ivi_index_table(sp, x, plot, data = mydata, plot_area = 400)
+ivi_index_table <- function(sp, x, plot, data = NULL, plot_area) {
 
   if (is.null(data)) {
-    if (length(unique(c(length(plot), length(sp), length(xha)))) > 1) {
+    if (length(unique(c(length(plot), length(sp), length(x)))) > 1) {
       stop("All input vectors (plot, sp, xha) must have the same length.")
     }
 
     df <-
       data.frame(
         sp = sp,
-        xha = xha,
+        x = x,
         plot = plot
       )
   } else {
 
     # Convert arguments to character strings (non-standard evaluation)
     sp_col <- deparse(substitute(sp))
-    xha_col <- deparse(substitute(xha))
+    x_col <- deparse(substitute(x))
     plot_col <- deparse(substitute(plot))
 
     # Prepare data frame
     df <- data.frame(
       sp = as.character(data[[sp_col]]),
-      xha = as.numeric(data[[xha_col]]),
+      x = as.numeric(data[[x_col]]),
       plot = as.character(data[[plot_col]])
     )
   }
@@ -54,43 +54,51 @@ ivi_index_table <- function(sp, xha, plot, data = NULL, plot_area) {
   }
 
   # Abundance (Nha) per species
-  nha_df <- df %>%
-    dplyr::group_by(sp) %>%
-    dplyr::summarise(Nha = Nha(xha, total_area), .groups = "drop")
+  nha_df <- df |>
+    dplyr::group_by(sp) |>
+    dplyr::summarise(Nha = Nha(x, total_area), .groups = "drop")
 
   # Dominance (Xha) per species
-  xha_df <- df %>%
-    dplyr::group_by(sp) %>%
-    dplyr::summarise(Xha = Xha(xha, total_area), .groups = "drop")
+  xha_df <- df |>
+    dplyr::group_by(sp) |>
+    dplyr::summarise(Xha = Xha(x, total_area), .groups = "drop")
 
   # Frequency: number of plots per species
-  plot_count <- df %>%
-    dplyr::group_by(plot, sp) %>%
-    dplyr::summarise(count = dplyr::n(), .groups = "drop") %>%
-    dplyr::group_by(sp) %>%
+  plot_count <- df |>
+    dplyr::group_by(plot, sp) |>
+    dplyr::summarise(count = dplyr::n(), .groups = "drop") |>
+    dplyr::group_by(sp) |>
     dplyr::summarise(Plots = dplyr::n(), .groups = "drop")
 
   # Combine all metrics
-  table <- dplyr::full_join(nha_df, xha_df, by = "sp") %>%
+  table <- dplyr::full_join(nha_df, xha_df, by = "sp") |>
     dplyr::full_join(plot_count, by = "sp")
 
   # Replace NA with 0 (in case some species are missing in any metric)
   table[is.na(table)] <- 0
 
   # Calculate relative values
-  table <- table %>%
+  tbl01 <-
+    table |>
     dplyr::mutate(
-      Abundance = (Nha / sum(Nha)) * 100,
-      Dominance = (Xha / sum(Xha)) * 100,
-      Frequency = (Plots / sum(Plots)) * 100,
-      IVI_raw = Abundance + Dominance + Frequency,
-      IVI = (IVI_raw / sum(IVI_raw)) * 100
-    ) %>%
-    dplyr::select(sp, Nha, Xha, Plots, Abundance, Dominance, Frequency, IVI) %>%
-    dplyr::arrange(dplyr::desc(IVI))
+      Abundance = (table$Nha / sum(table$Nha)) * 100,
+      Dominance = (table$Xha / sum(table$Xha)) * 100,
+      Frequency = (table$Plots / sum(table$Plots)) * 100)
 
-  table$rank <- 1:nrow(table)
+  tbl02 <-
+    tbl01 |>
+    dplyr::mutate(IVI_raw = tbl01$Abundance + tbl01$Dominance + tbl01$Frequency)
 
-  return(as.data.frame(table))
+  tbl03 <-
+    tbl02 |>
+    dplyr::mutate(IVI = (tbl02$IVI_raw / sum(tbl02$IVI_raw)) * 100)
+
+  tbl04 <- tbl03[,c("sp","Nha", "Xha", "Plots", "Abundance", "Dominance", "Frequency", "IVI" )]
+
+  tbl05 <- tbl04[order(tbl04$IVI, decreasing=TRUE),]
+
+  tbl05$rank <- 1:nrow(tbl05)
+
+  return(tbl05)
 
 }

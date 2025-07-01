@@ -93,8 +93,8 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL) {
   # Calculate nearest neighbor indices using the external function `nnss5c`
   nnss_results <- data1 |>
     dplyr::group_by(plot) |>
-    dplyr::mutate(i = nnss5c(x = x, y = y, sp = sp, d = d, h = h, r = r)) |>
-    tidyr::separate(i, into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
+    dplyr::mutate(df_nnss = nnss5c(x = x, y = y, sp = sp, d = d, h = h, r = r)) |>
+    tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
 
   # Convert calculated columns to numeric
   numeric_cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")
