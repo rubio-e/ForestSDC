@@ -3,7 +3,7 @@
 **ForestSDC**: *Forest stand Structure, tree Diversity, and species Composition*
 <!-- badges: start -->
 [![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](https://github.com/rubio-e/ForestSDC)
-[![License: MIT](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.md)
 <!-- badges: end -->
 
 ## Descripción
