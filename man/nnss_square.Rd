@@ -4,7 +4,7 @@
 \alias{nnss_square}
 \title{Calculate Nearest Neighbor Indices for Square Plots}
 \usage{
-nnss_square(plot, x, y, sp, d, h, xmax, ymax, data = NULL)
+nnss_square(plot, x, y, sp, d, h, xr, yr, data = NULL)
 }
 \arguments{
 \item{plot}{A numeric or character variable representing the plot identifier.}
@@ -19,9 +19,9 @@ nnss_square(plot, x, y, sp, d, h, xmax, ymax, data = NULL)
 
 \item{h}{A numeric vector representing tree heights.}
 
-\item{xmax}{A numeric value representing the maximum x-coordinate value for the plot.}
+\item{xr}{A numeric vector including the min and the max values of the x-coordinates for the plot.}
 
-\item{ymax}{A numeric value representing the maximum y-coordinate value for the plot.}
+\item{yr}{A numeric vector including the min and the max values of the x-coordinates for the plot.}
 
 \item{data}{A data frame containing all the required columns (\code{plot}, \code{x}, \code{y}, \code{sp}, \code{d}, \code{h}).}
 }
@@ -52,6 +52,7 @@ d <- runif(100, min = 7.5, max = 60)
 h <- 5.4349 + d * 0.4219
 plot <- rep("P01", 100)
 dataP01 <- data.frame(plot, x, y, sp, d, h)
-nnss_square(plot = plot, x = x, y = y, sp = sp, d = d, h = h, xmax = 50, ymax = 50, data = dataP01)
+nnss_square(plot = plot, x = x, y = y, sp = sp, d = d,
+h = h, xr = c(0,50), yr = c(0,50), data = dataP01)
 
 }

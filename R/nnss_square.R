@@ -10,8 +10,8 @@
 #' @param d A numeric vector representing tree diameters.
 #' @param h A numeric vector representing tree heights.
 #' @param sp A factor or character vector representing tree species.
-#' @param xmax A numeric value representing the maximum x-coordinate value for the plot.
-#' @param ymax A numeric value representing the maximum y-coordinate value for the plot.
+#' @param xr A numeric vector including the min and the max values of the x-coordinates for the plot.
+#' @param yr A numeric vector including the min and the max values of the x-coordinates for the plot.
 #' @param data A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
 #'
 #' @return A data frame with calculated nearest neighbor indices for each tree.
@@ -34,10 +34,11 @@
 #' h <- 5.4349 + d * 0.4219
 #' plot <- rep("P01", 100)
 #' dataP01 <- data.frame(plot, x, y, sp, d, h)
-#' nnss_square(plot = plot, x = x, y = y, sp = sp, d = d, h = h, xmax = 50, ymax = 50, data = dataP01)
+#' nnss_square(plot = plot, x = x, y = y, sp = sp, d = d,
+#' h = h, xr = c(0,50), yr = c(0,50), data = dataP01)
 #'
 #' @export
-nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
+nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
   # Validate input
   if (is.null(data)) {
     if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
@@ -48,6 +49,8 @@ nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
         plot = plot,
         x = x,
         y = y,
+        xc = x-xr[1],
+        yc = y-yr[1],
         sp = sp,
         d = d,
         h = h
@@ -69,6 +72,8 @@ nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
         plot = data[[plot]],
         x = data[[x]],
         y = data[[y]],
+        xc = data[[x]]-xr[1],
+        yc = data[[y]]-yr[1],
         sp = data[[sp]],
         d = data[[d]],
         h = data[[h]]
@@ -89,13 +94,13 @@ nnss_square <- function(plot, x, y, sp, d, h, xmax, ymax, data = NULL) {
     nnss_alli <- data1 |>
       dplyr::group_by(plot) |>
       dplyr::mutate(df_nnss = nnss5q(
-        x = x,
-        y = y,
+        x = data1$xc,
+        y = data1$yc,
         sp = sp,
         d = d,
         h = h,
-        xmax = xmax,
-        ymax = ymax
+        xmax = xr[2],
+        ymax = yr[2]
       ))
 
     # Separate the calculated indices into individual columns
