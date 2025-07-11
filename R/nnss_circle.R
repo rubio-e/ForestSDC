@@ -103,7 +103,7 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, ccoords = NULL) {
     data1$yy <- data1$y-(ccoords[,2]-r)
     nnss_results <- data1 |>
       dplyr::group_by(plot) |>
-      dplyr::mutate(df_nnss = nnss5c(x = xx, y = yy, sp = sp, d = d, h = h, r = r)) |>
+      dplyr::mutate(df_nnss = nnss5c(x = data1$xx, y = data1$yy, sp = sp, d = d, h = h, r = r)) |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
   }
 
