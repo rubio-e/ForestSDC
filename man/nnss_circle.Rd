@@ -4,7 +4,7 @@
 \alias{nnss_circle}
 \title{Calculate Nearest Neighbor Indices for Circular Plots}
 \usage{
-nnss_circle(plot, x, y, sp, d, h, r, data = NULL)
+nnss_circle(plot, x, y, sp, d, h, r, data = NULL, ccoords = NULL)
 }
 \arguments{
 \item{plot}{A numeric or character variable representing the plot identifier.}
@@ -22,6 +22,8 @@ nnss_circle(plot, x, y, sp, d, h, r, data = NULL)
 \item{r}{A numeric value representing the radius of the circular plot (must be positive).}
 
 \item{data}{A data frame containing all the required columns (\code{plot}, \code{x}, \code{y}, \code{sp}, \code{d}, \code{h}).}
+
+\item{ccoords}{a vector including the center coordinates of the plots.}
 }
 \value{
 A data frame with calculated nearest neighbor indices for each tree.
@@ -51,6 +53,7 @@ d <- runif(100, min = 7.5, max = 60)
 h <- 5.4349 + d * 0.4219
 plot <- rep("P01", 100)
 dataP02 <- data.frame(plot, df_xy, sp, d, h)
-nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP02)
+nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d,
+h = h, r = plot_radius, data = dataP02)
 
 }
