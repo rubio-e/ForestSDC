@@ -21,5 +21,6 @@
 #' @import dplyr
 #' @import tidyr
 #' @import FNN
+#' @importFrom rlang .data
 "_PACKAGE"
 NULL

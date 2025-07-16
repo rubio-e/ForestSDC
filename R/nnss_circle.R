@@ -12,7 +12,7 @@
 #' @param sp A factor or character vector representing tree species.
 #' @param r A numeric value representing the radius of the circular plot (must be positive).
 #' @param data A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
-#' @param ccoords a vector including the center coordinates of the plots.
+#' @param center_point a vector including the center coordinates of the plots.
 #'
 #' @return A data frame with calculated nearest neighbor indices for each tree.
 #' Columns include:
@@ -39,7 +39,7 @@
 #' h = h, r = plot_radius, data = dataP02)
 #'
 #' @export
-nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, ccoords = NULL) {
+nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NULL) {
   # Validate input
   if (is.null(data)) {
     if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
@@ -93,17 +93,18 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, ccoords = NULL) {
   }
 
   # Calculate nearest neighbor indices using the external function `nnss5c`
-  if (is.null(ccoords)) {
+  if (is.null(center_point)) {
+
     nnss_results <- data1 |>
       dplyr::group_by(plot) |>
       dplyr::mutate(df_nnss = nnss5c(x = x, y = y, sp = sp, d = d, h = h, r = r)) |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
   } else {
-    data1$xx <- data1$x-(ccoords[,1]-r)
-    data1$yy <- data1$y-(ccoords[,2]-r)
+    data1$xx <- data1$x-(center_point[,1]-r)
+    data1$yy <- data1$y-(center_point[,2]-r)
     nnss_results <- data1 |>
       dplyr::group_by(plot) |>
-      dplyr::mutate(df_nnss = nnss5c(x = data1$xx, y = data1$yy, sp = sp, d = d, h = h, r = r)) |>
+      dplyr::mutate(df_nnss = nnss5c(x = .data$xx, y = .data$yy, sp = sp, d = d, h = h, r = r)) |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
   }
 

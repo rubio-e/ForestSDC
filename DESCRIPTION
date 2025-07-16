@@ -8,7 +8,8 @@ Description: The package provides tools for forest inventory analysis, including
 Imports: 
     FNN,
     dplyr,
-    tidyr
+    tidyr,
+    rlang
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true 
