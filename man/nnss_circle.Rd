@@ -4,11 +4,9 @@
 \alias{nnss_circle}
 \title{Calculate Nearest Neighbor Indices for Circular Plots}
 \usage{
-nnss_circle(plot, x, y, sp, d, h, r, data = NULL, center_point = NULL)
+nnss_circle(x, y, sp, d, h, r, data = NULL, center_point = NULL)
 }
 \arguments{
-\item{plot}{A numeric or character variable representing the plot identifier.}
-
 \item{x}{A numeric vector of x-coordinates for each tree.}
 
 \item{y}{A numeric vector of y-coordinates for each tree.}
@@ -44,16 +42,15 @@ It requires coordinates, tree diameter, height, and species information, and ret
 several indices related to tree competition and spacing.
 }
 \examples{
-plot_radius <- 17.84124 # for a 1000 m2 plot
-azi <- runif(100, min = 0, max = 360)
-dis <- runif(100, min = 1, max = plot_radius)
-df_xy <- coordxy(azi, dis, plot_radius*2)
-sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
-d <- runif(100, min = 7.5, max = 60)
-h <- 5.4349 + d * 0.4219
-plot <- rep("P01", 100)
-dataP02 <- data.frame(plot, df_xy, sp, d, h)
-nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d,
-h = h, r = plot_radius, data = dataP02)
+
+data(pipse_azimuth)
+
+require(dplyr)
+
+pipse_xy <-
+pipse_azimuth \%>\%
+mutate(coord_xy(azi = azimuth,dis = distance, r = 17.84*2))
+
+nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
 
 }

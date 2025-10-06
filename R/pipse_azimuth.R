@@ -3,7 +3,7 @@
 #' This dataset includes tree measurements and spatial orientation information
 #' for *Pinus pseudostrobus* individuals sampled in multiple plots.
 #'
-#' @format A data frame with `r nrow(pipse_azimuth)` rows and `r ncol(pipse_azimuth)` variables:
+#' @format A data frame with 100 rows and 6 variables:
 #' \describe{
 #'   \item{plot}{Plot identifier (character)}
 #'   \item{sp}{Species code, here `PIPSE` for *Pinus pseudostrobus* (character)}

@@ -5,7 +5,7 @@
 \alias{pipse_azimuth}
 \title{Azimuth and distance data for Pinus pseudostrobus}
 \format{
-A data frame with `r nrow(pipse_azimuth)` rows and `r ncol(pipse_azimuth)` variables:
+A data frame with 100 rows and 6 variables:
 \describe{
   \item{plot}{Plot identifier (character)}
   \item{sp}{Species code, here `PIPSE` for *Pinus pseudostrobus* (character)}

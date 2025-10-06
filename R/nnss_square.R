@@ -4,7 +4,7 @@
 #' It requires coordinates, tree diameter, height, and species information, along with the
 #' plot's maximum x and y dimensions. The function returns several indices related to tree competition and spacing.
 #'
-#' @param plot A numeric or character variable representing the plot identifier.
+# @param plot A numeric or character variable representing the plot identifier.
 #' @param x A numeric vector of x-coordinates for each tree.
 #' @param y A numeric vector of y-coordinates for each tree.
 #' @param d A numeric vector representing tree diameters.
@@ -12,7 +12,7 @@
 #' @param sp A factor or character vector representing tree species.
 #' @param xr A numeric vector including the min and the max values of the x-coordinates for the plot.
 #' @param yr A numeric vector including the min and the max values of the x-coordinates for the plot.
-#' @param data A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
+#' @param data A data frame containing all the required columns (`x`, `y`, `sp`, `d`, `h`).
 #'
 #' @return A data frame with calculated nearest neighbor indices for each tree.
 #' Columns include:
@@ -34,23 +34,23 @@
 #' h <- 5.4349 + d * 0.4219
 #' plot <- rep("P01", 100)
 #' dataP01 <- data.frame(plot, x, y, sp, d, h)
-#' nnss_square(plot = plot, x = x, y = y, sp = sp, d = d,
-#' h = h, xr = c(0,50), yr = c(0,50), data = dataP01)
+#' nnss_square(x = x, y = y, sp = sp, d = d,
+#' h = h, xr = cbind(0,50), yr = cbind(0,50), data = dataP01)
 #'
 #' @export
-nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
+nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
   # Validate input
   if (is.null(data)) {
-    if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
+    if (length(unique(c(length(x), length(y), length(sp), length(d), length(h)))) > 1) {
       stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
     }
     data1 <-
       data.frame(
-        plot = plot,
+        # plot = plot,
         x = x,
         y = y,
-        xc = x-xr[1],
-        yc = y-yr[1],
+        xc = x-xr[,1],
+        yc = y-yr[,1],
         sp = sp,
         d = d,
         h = h
@@ -60,7 +60,7 @@ nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
     # if (!all(required_cols %in% colnames(data))) {
     #   stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
     # }
-    plot <- deparse(substitute(plot))
+    # plot <- deparse(substitute(plot))
     x <- deparse(substitute(x))
     y <- deparse(substitute(y))
     sp <- deparse(substitute(sp))
@@ -69,11 +69,11 @@ nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
 
     data1 <-
       data.frame(
-        plot = data[[plot]],
+        # plot = data[[plot]],
         x = data[[x]],
         y = data[[y]],
-        xc = data[[x]]-xr[1],
-        yc = data[[y]]-yr[1],
+        xc = data[[x]]-xr[,1],
+        yc = data[[y]]-yr[,1],
         sp = data[[sp]],
         d = data[[d]],
         h = data[[h]]
@@ -82,7 +82,7 @@ nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
 
   # Identify duplicated rows
   data_duplicated <- data1 |>
-    dplyr::add_count(plot, x, y) |>
+    dplyr::add_count(x, y) |>
     dplyr::filter(n > 1) |>
     dplyr::distinct()
 
@@ -92,15 +92,15 @@ nnss_square <- function(plot, x, y, sp, d, h, xr, yr, data = NULL) {
   } else {
     # Calculate Nearest Neighbor indices using an external function `nnss5q`
     nnss_alli <- data1 |>
-      dplyr::group_by(plot) |>
+      # dplyr::group_by(plot) |>
       dplyr::mutate(df_nnss = nnss5q(
         x = data1$xc,
         y = data1$yc,
         sp = sp,
         d = d,
         h = h,
-        xmax = xr[2],
-        ymax = yr[2]
+        xmax = xr[,2]-xr[,1],
+        ymax = yr[,2]-yr[,1]
       ))
 
     # Separate the calculated indices into individual columns

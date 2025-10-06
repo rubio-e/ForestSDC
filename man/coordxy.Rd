@@ -27,3 +27,4 @@ or the side length (for squares).
 coordxy(350, 15, 20)
 
 }
+\keyword{internal}

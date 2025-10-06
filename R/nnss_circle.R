@@ -4,7 +4,7 @@
 #' It requires coordinates, tree diameter, height, and species information, and returns
 #' several indices related to tree competition and spacing.
 #'
-#' @param plot A numeric or character variable representing the plot identifier.
+# @param plot A numeric or character variable representing the plot identifier.
 #' @param x A numeric vector of x-coordinates for each tree.
 #' @param y A numeric vector of y-coordinates for each tree.
 #' @param d A numeric vector representing tree diameters.
@@ -26,28 +26,32 @@
 #' @md
 #'
 #' @examples
-#' plot_radius <- 17.84124 # for a 1000 m2 plot
-#' azi <- runif(100, min = 0, max = 360)
-#' dis <- runif(100, min = 1, max = plot_radius)
-#' df_xy <- coordxy(azi, dis, plot_radius*2)
-#' sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
-#' d <- runif(100, min = 7.5, max = 60)
-#' h <- 5.4349 + d * 0.4219
-#' plot <- rep("P01", 100)
-#' dataP02 <- data.frame(plot, df_xy, sp, d, h)
-#' nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d,
-#' h = h, r = plot_radius, data = dataP02)
+#'
+#' data(pipse_azimuth)
+#'
+#' require(dplyr)
+#'
+#' pipse_xy <-
+#' pipse_azimuth %>%
+#' mutate(coord_xy(azi = azimuth,dis = distance, r = 17.84*2))
+#'
+#' nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
 #'
 #' @export
-nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NULL) {
+nnss_circle <- function(x, y, sp, d, h, r, data = NULL, center_point = NULL) {
   # Validate input
+  if(is.null(center_point)){
+    center_point = cbind(r,r)
+  }
   if (is.null(data)) {
-    if (length(unique(c(length(plot), length(x), length(y), length(sp), length(d), length(h)))) > 1) {
+    if (length(unique(c(length(x), length(y), length(sp), length(d), length(h)))) > 1) {
       stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
     }
     data1 <-
       data.frame(
-        plot = plot,
+        # plot = plot,
+        xc = x-(center_point[,1]-r),
+        yc = y-(center_point[,2]-r),
         x = x,
         y = y,
         sp = sp,
@@ -59,7 +63,7 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NUL
     # if (!all(required_cols %in% colnames(data))) {
     #   stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
     # }
-    plot <- deparse(substitute(plot))
+    # plot <- deparse(substitute(plot))
     x <- deparse(substitute(x))
     y <- deparse(substitute(y))
     sp <- deparse(substitute(sp))
@@ -68,7 +72,9 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NUL
 
     data1 <-
       data.frame(
-        plot = data[[plot]],
+        # plot = data[[plot]],
+        xc = data[[x]]-(center_point[,1]-r),
+        yc = data[[y]]-(center_point[,2]-r),
         x = data[[x]],
         y = data[[y]],
         sp = data[[sp]],
@@ -83,7 +89,8 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NUL
 
   # Check for duplicate rows
   duplicates <- data1 |>
-    dplyr::add_count(plot, x, y) |>
+    # dplyr::add_count(plot, x, y) |>
+    dplyr::add_count(x, y) |>
     dplyr::filter(n > 1) |>
     dplyr::distinct()
 
@@ -96,15 +103,15 @@ nnss_circle <- function(plot, x, y, sp, d, h, r, data = NULL, center_point = NUL
   if (is.null(center_point)) {
 
     nnss_results <- data1 |>
-      dplyr::group_by(plot) |>
+      # dplyr::group_by(plot) |>
       dplyr::mutate(df_nnss = nnss5c(x = x, y = y, sp = sp, d = d, h = h, r = r)) |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
   } else {
-    data1$xx <- data1$x-(center_point[,1]-r)
-    data1$yy <- data1$y-(center_point[,2]-r)
+    # data1$xx <- data1$x-(center_point[,1]-r)
+    # data1$yy <- data1$y-(center_point[,2]-r)
     nnss_results <- data1 |>
-      dplyr::group_by(plot) |>
-      dplyr::mutate(df_nnss = nnss5c(x = .data$xx, y = .data$yy, sp = sp, d = d, h = h, r = r)) |>
+      # dplyr::group_by(plot) |>
+      dplyr::mutate(df_nnss = nnss5c(x = data1$xc, y = data1$yc, sp = sp, d = d, h = h, r = r)) |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
   }
 

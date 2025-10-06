@@ -1,0 +1,28 @@
+#' Circular plot data for Pinus pseudostrobus
+#'
+#' This dataset contains measurements collected in circular plots established
+#' for the study of *Pinus pseudostrobus* stands.
+#'
+#' @format A data frame with 1743 rows and 12 variables:
+#' \describe{
+#'   \item{tree}{Unique identifier for the tree}
+#'   \item{plot}{Unique identifier for the sample plot}
+#'   \item{x}{x coordinate for the tree}
+#'   \item{y}{y coordinate for the tree}
+#'   \item{sp}{Species code (character)}
+#'   \item{cond}{Condition}
+#'   \item{d}{Diameter at breast height in cm (numeric)}
+#'   \item{h}{Tree total height in m (numeric)}
+#'   \item{cbh}{Crown base height in m (numeric)}
+#'   \item{ca}{Crown area}
+#'   \item{x_center}{x coordinate for the plot center}
+#'   \item{y_center}{y coordinate for the plot center}
+#' }
+#'
+#' @details
+#' The data were resampled from the original data in circular plots (1000 square meters)
+#' following standard forest inventory methodology. They can be used for spatial structure analysis,
+#' stand diversity, and structure estimation, or modeling.
+#'
+#' @source Field data collected by Ernesto Rubio.
+"pipse_cplot"

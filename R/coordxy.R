@@ -16,6 +16,7 @@
 #' coordxy(350, 15, 20)
 #'
 #' @export
+#' @keywords internal
 coordxy <- function(azi, dis, z) {
   # Define the center based on the plot size
   center <- z / 2

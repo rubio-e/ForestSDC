@@ -27,21 +27,42 @@ install.packages("devtools")
 devtools::install_github("rubio-e/ForestSDC")
 ```
 
-## Uso básico
+## Uso básico de ForestSDC
+La librería cuenta con bases de datos reales que pueden ser utilizados para practicar.
 
 ```r
 library(ForestSDC)
-
 # Cálculo del índice de Shannon
-especies <- c("P. patula", "A. religiosa", "P. patula", "Q. castanea")
-shannon(especies)
+library(ForestSDC)
+data("pipse_azimuth")
+head(pipse_azimuth)
 ```
+
+### Diversidad de especies
+El cálculo de índices de diversidad en sitios individuales se puede llevar a cabo siguiendo el estándar de la programación en R. Por ejemplo, para calcular el índice de entropía de Shannon se puede utilizar la función `shannon`.
+```r
+shannon(pipse_azimuth$sp)
+[1] 1.542215
+```
+
+Este procedimiendo se puede seguir para los otros índices como el de `Simpson` o `Margalef`.
+```r
+margalef(pipse_azimuth$sp)
+[1] 1.737178
+
+simpson(pipse_azimuth$sp)
+[1] 0.2862
+```
+
+
 
 ## 📊 Funciones destacadas: Análisis de Vecinos más Cercanos
 
 ### Simulación de una base de datos
 
 Se crea una base de datos para un sitio circular de 1000 metros cuadrados.
+
+
 
 ```r
 set.seed(42)
