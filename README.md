@@ -37,6 +37,15 @@ library(ForestSDC)
 data("pipse_azimuth")
 head(pipse_azimuth)
 ```
+```r
+##   plot    sp    d    h   azimuth  distance
+## 1  P01 QUCAN 13.9  7.2 277.74297 17.548594
+## 2  P01 PIPSE 22.7 15.1 136.72114  6.862664
+## 3  P01 PRSER 10.9  3.9 160.80413  4.384468
+## 4  P01 PIPSE 11.0  8.0 165.87053  1.040388
+## 5  P01 PIPSE  8.0  6.4  63.67683  3.653111
+## 6  P01 PIPSE 31.3 12.2  61.43844  1.977114
+```
 
 ### Diversidad de especies
 El cálculo de índices de diversidad en sitios individuales se puede llevar a cabo siguiendo el estándar de la programación en R. Por ejemplo, para calcular el índice de entropía de Shannon se puede utilizar la función `shannon`.
@@ -54,134 +63,162 @@ simpson(pipse_azimuth$sp)
 [1] 0.2862
 ```
 
+### Composición de especies
 
+```r
+data("pipse_cplot")
+ivi_index_table(sp = sp, x = ca, plot = plot, data = pipse_cplot, plot_area = 1000)
+```
+
+```r
+## # A tibble: 13 × 9
+##    sp       Nha     Xha Plots Abundance Dominance Frequency    IVI  rank
+##    <chr>  <dbl>   <dbl> <int>     <dbl>     <dbl>     <dbl>  <dbl> <int>
+##  1 PIPSE 248    7126.      30    42.7     52.0        13.9  36.2       1
+##  2 QUCAN 105    2741.      30    18.1     20.0        13.9  17.3       2
+##  3 JUFLA  95.7  1611.      30    16.5     11.8        13.9  14.0       3
+##  4 QURIZ  48     953.      28     8.26     6.95       13.0   9.39      4
+##  5 ARXAL  29.7   379.      27     5.11     2.76       12.5   6.79      5
+##  6 CAMYR  21     306.      23     3.61     2.24       10.6   5.50      6
+##  7 QUPOL  21.3   479.      19     3.67     3.50        8.80  5.32      7
+##  8 PRSER   3.67   10.3      7     0.631    0.0753      3.24  1.32      8
+##  9 PRLAE   2       9.05     6     0.344    0.0660      2.78  1.06      9
+## 10 MITEX   3      18.1      5     0.516    0.132       2.31  0.988    10
+## 11 ACCOU   1.67   16.0      5     0.287    0.117       2.31  0.906    11
+## 12 QULAC   1      43.0      3     0.172    0.314       1.39  0.625    12
+## 13 MADE    1      14.2      3     0.172    0.104       1.39  0.555    13
+```
+Los índices se pueden calcular para cada uno de los sitios utilizando la librería dplyr.
+```r
+require(dplyr)
+
+pipse_cplot %>%
+  group_by(plot) %>%
+  reframe(a_index = A_index(x = h, y = sp), H = shannon(sp), hdom = h_dom(h = h, d = d, ps = 1000))
+```
+
+```r
+## # A tibble: 30 × 4
+##     plot a_index     H  hdom
+##    <int>   <dbl> <dbl> <dbl>
+##  1     1    1.94  1.49  13.5
+##  2     2    2.54  1.48  11.8
+##  3     3    1.94  1.39  13.5
+##  4     4    2.06  1.22  13.4
+##  5     5    2.58  1.63  12.2
+##  6     6    2.65  1.39  11.6
+##  7     7    2.51  1.53  13.2
+##  8     8    1.63  1.59  14.3
+##  9     9    2.12  1.51  14.4
+## 10    10    2.27  1.46  12.0
+## # ℹ 20 more rows
+```
 
 ## 📊 Funciones destacadas: Análisis de Vecinos más Cercanos
 
-### Simulación de una base de datos
-
-Se crea una base de datos para un sitio circular de 1000 metros cuadrados.
-
-
-
+### Coordenadas
+También incluye funciones para estimar las coordenadas x y y con datos de distancia y azimut con la funcióncoord_xy, la cuál puede ser utilizada de forma directa.
 ```r
-set.seed(42)
-plot_radius <- 17.84124 # for a 1000 m2 plot
-azi <- runif(100, min = 0, max = 360)
-dis <- runif(100, min = 1, max = plot_radius)
-df_xy <- coordxy(azi, dis, plot_radius*2)
-sp <- factor(sample(c("Pinus", "Quercus", "Abies"), 100, replace = TRUE))
-d <- runif(100, min = 7.5, max = 60)
-h <- 5.4349 + d * 0.4219
-plot <- rep("P01", 100)
-dataP01 <- data.frame(plot, df_xy, sp, d, h)
-head(dataP01)
+coord_xy(azi = 180, dis = 2, r = 17.84*2)
+##       x     y
+## 1 17.84 15.84
 ```
-### Explorar la base de datos simulados
+## 📈 Ejemplos con dplyr
+utilizando la función mutate de la librería dplyr.
 ```r
-##   plot         x         y      sp        d        h
-## 1  P01  8.639807 15.400107   Abies 19.15307 13.51558
-## 2  P01 24.425945  1.899083   Abies 33.14083 19.41702
-## 3  P01 28.918045 21.439935   Abies 13.64687 11.19251
-## 4  P01 16.712357 17.962755   Abies 23.23114 15.23612
-## 5  P01 17.724337 16.430860 Quercus 32.92668 19.32667
-## 6  P01 22.147076 32.765615   Abies 50.71430 26.83126
+require(dplyr)
+pipse_xy <- 
+pipse_azimuth %>% 
+    mutate(coord_xy(azi = azimuth,dis = distance, r = 17.84*2))
+head(pipse_xy)
+##   plot    sp    d    h   azimuth  distance          x        y
+## 1  P01 QUCAN 13.9  7.2 277.74297 17.548594  0.4514071 20.20431
+## 2  P01 PIPSE 22.7 15.1 136.72114  6.862664 22.5446978 12.84380
+## 3  P01 PRSER 10.9  3.9 160.80413  4.384468 19.2816067 13.69931
+## 4  P01 PIPSE 11.0  8.0 165.87053  1.040388 18.0939731 16.83109
+## 5  P01 PIPSE  8.0  6.4  63.67683  3.653111 21.1143096 19.45991
+## 6  P01 PIPSE 31.3 12.2  61.43844  1.977114 19.5765068 18.78526
+```
+## 📈 Distrubución espacial con ggplot
+Ahora, estos datos los podemos graficar con la librería ggplot2 para revisar su distribución espacial.
+```r
+require(ggplot2)
+ggplot(pipse_xy, aes(x = x, y = y))+
+  geom_point()+
+  coord_fixed()
+```
+Incluso se pueden hacer modificaciones para colorear con base en la especie y escalar con el diámetro.
+
+```r
+ggplot(pipse_xy, aes(x = x, y = y))+
+  geom_point(aes(colour = sp, size = d))+
+  coord_fixed()
 ```
 
-### Graficar la posición del arbolado utilizando las librerías `ggplot2`, `dplyr` y `ggforce`
+### Análisis espacial
+## 📈 sitios circulares
+A continuación se muestra un ejemplo del cálculo de los índices de vecindad con la función nnss_circle. 
+Esta función se aplica solamente a sitios circulares y requiere de conocer el radio del sitio. En el ejemplo se 
+muestra un sitio de 1000 metros cuadrados con radio de 17.84.
 ```r
-library(ggplot2)
-library(dplyr)
-library(ggforce)
-dataP01 %>%
-  ggplot()+
-  labs(title = "Circular plot", caption = "Different color are given by the species")+
-  geom_point(aes(x,y, color = sp))+
+pipse_nnss <-
+nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
+
+head(pipse_nnss)
+```
+
+```r
+##           xc       yc          x        y    sp    d    h   Ui   Mi dDomi hDomi
+## 1  0.4514071 20.20431  0.4514071 20.20431 QUCAN 13.9  7.2 1.00 0.75  0.50  0.25
+## 2 22.5446978 12.84380 22.5446978 12.84380 PIPSE 22.7 15.1 0.50 0.25  0.50  1.00
+## 3 19.2816067 13.69931 19.2816067 13.69931 PRSER 10.9  3.9 0.50 1.00  0.25  0.00
+## 4 18.0939731 16.83109 18.0939731 16.83109 PIPSE 11.0  8.0 0.75 0.25  0.25  0.00
+## 5 21.1143096 19.45991 21.1143096 19.45991 PIPSE  8.0  6.4 0.75 0.50  0.00  0.00
+## 6 19.5765068 18.78526 19.5765068 18.78526 PIPSE 31.3 12.2 0.75 0.50  1.00  0.75
+##        dDif      hDif NN1
+## 1 0.2673575 0.3004503   0
+## 2 0.2515234 0.4023179   1
+## 3 0.2719935 0.5832759   1
+## 4 0.4142823 0.3776968   1
+## 5 0.4560715 0.2597615   1
+## 6 0.5115815 0.2868852   1
+```
+
+En el siguiente ejemplo se muestra la distribución de los árboles que pueden ser árbol central [1] y los que no [0]. 
+Esto se calcula con el efecto de borde a través del algoritmo NN1.
+```r
+require(ggplot2)
+
+ggplot(pipse_nnss, aes(x,y))+
+  geom_point(aes(colour = factor(NN1)))+
+  theme_bw()
+```
+
+## 📈 Efecto de borde NN1 vs Tradicional
+En este ejemplo se utiliza la variable center_point que indica las coordenadas centrales del sitio de muestreo.
+Esto es útil para sitios con coordenadas centrales diferentes al radio.
+```r
+library(ggforce) # For drawing the circle
+data("pipse_cplot")
+pipse_cplot1 <- pipse_cplot[pipse_cplot$plot == 1, ]
+
+pipse_cplot1n <-
+  nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84124, data = pipse_cplot1,
+    center_point = cbind((pipse_cplot1$x_center), (pipse_cplot1$y_center)))
+
+plot_radius <- 17.84
+
+ggplot(pipse_cplot1n, aes(x = xc, y = yc)) +
+  geom_point(aes(colour = as.factor(NN1))) +
   geom_circle(aes(x0 = plot_radius, y0 = plot_radius, r = plot_radius)) +
-  coord_fixed()+
-  theme_bw()+
+  geom_circle(aes(x0 = plot_radius, y0 = plot_radius, r = plot_radius - 5)) +
+  coord_fixed() +
+  theme_bw() +
   theme_minimal()
 ```
 
-```r
-# Falta plot
-```
-### Uso de la función `nnss_circle()`: Parcelas circulares
 
-Calcula índices espaciales para árboles dentro de una parcela circular.
 
-```r
-test001 <- nnss_circle(plot = plot, x = x, y = y, sp = sp, d = d, h = h, r = plot_radius, data = dataP01)
-head(test001)
-```
-
-```r
-## # A tibble: 6 × 13
-## # Groups:   plot [1]
-##   plot      x     y sp         d     h    Ui    Mi dDomi hDomi  dDif  hDif   NN1
-##   <chr> <dbl> <dbl> <fct>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 P01    8.64 15.4  Abies   19.2  13.5  0.5   0.75  0     0    0.354 0.261     1
-## 2 P01   24.4   1.90 Abies   33.1  19.4  0.75  0.5   0.75  0.75 0.422 0.306     0
-## 3 P01   28.9  21.4  Abies   13.6  11.2  0.75  0.75  0     0    0.533 0.393     0
-## 4 P01   16.7  18.0  Abies   23.2  15.2  0.5   0.5   0     0    0.410 0.317     1
-## 5 P01   17.7  16.4  Querc…  32.9  19.3  0.5   0.5   0.75  0.75 0.223 0.169     1
-## 6 P01   22.1  32.8  Abies   50.7  26.8  0.5   0.5   0.75  0.75 0.463 0.369     0
-```
-
-### `nnss_square()`: Parcelas cuadradas
-```{r}
-ntrees <- 200
-x <- runif(ntrees, min = 1, max = 50)
-y <- runif(ntrees, min = 1, max = 50)
-sp <- factor(sample(c("Pinus", "Quercus", "Abies"), 100, replace = TRUE))
-d <- runif(ntrees, min = 7.5, max = 60)
-h <- 5.4349 + d * 0.4219
-plot <- rep("P02", ntrees)
-dataP02 <- data.frame(plot, x, y, sp, d, h)
-test002 <-nnss_square(plot = plot, x = x, y = y, sp = sp, d = d, h = h, xmax = 50, ymax = 50, data = dataP02)
-head(test002)
-```
-```{r}
-## # A tibble: 6 × 13
-## # Groups:   plot [1]
-##   plot      x     y sp         d     h    Ui    Mi dDomi hDomi  dDif  hDif   NN1
-##   <chr> <dbl> <dbl> <fct>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 P02    39.0 45.5  Querc…  7.68  8.67  0.5   0.5   0     0    0.724 0.502     1
-## 2 P02    10.8 17.3  Querc… 17.2  12.7   0.25  0.75  0.5   0.5  0.443 0.338     1
-## 3 P02    15.6 10.3  Abies   8.84  9.17  0.5   1     0     0    0.730 0.537     1
-## 4 P02    49.3 21.8  Abies  18.0  13.0   0.5   0.25  0     0    0.497 0.381     0
-## 5 P02    11.6  4.54 Querc… 25.7  16.3   0.5   0.75  0.25  0.25 0.223 0.160     0
-## 6 P02    41.9 47.1  Abies  27.8  17.2   0.25  1     0.75  0.75 0.399 0.275     0
-```
-
-```{r}
-test002$NN1 <- as.factor(test002$NN1)
-test002 %>%
-  ggplot()+
-  geom_point(aes(x,y, color = NN1))+
-  geom_rect(aes(xmin = 5, xmax = 45, ymin = 5, ymax = 45), color="black", alpha=0)+
-  geom_rect(aes(xmin = 0, xmax = 50, ymin = 0, ymax = 50), color="black", alpha=0)+
-  coord_fixed()+
-  theme_minimal()
-```
-
-## 📈 Ejemplos adicionales
-
-### `A_index()`: Índice de perfil de especies
-
-```r
-x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
-y <- c("P. patula", "P. patula", "P. patula", "A. religiosa", "Q. castanea",
-       "P. patula", "P. patula", "P. patula", "P. patula", "P. patula")
-A_index(x, y)
-```
-
-### `shannon()`: Índice de Shannon
-
-```r
-species <- c("P. patula", "A. religiosa", "A. religiosa", "Q. castanea", "P. patula")
-shannon(species)
-```
 
 ---
 
