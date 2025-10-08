@@ -148,7 +148,7 @@ ggplot(pipse_xy, aes(x = x, y = y))+
   coord_fixed()
 ```
 
-# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/square_plot01.png' width="400" /></a>
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/square_plot01.png' width="500" /></a>
 
 Incluso se pueden hacer modificaciones para colorear con base en la especie y escalar con el diámetro.
 
@@ -157,6 +157,7 @@ ggplot(pipse_xy, aes(x = x, y = y))+
   geom_point(aes(colour = sp, size = d))+
   coord_fixed()
 ```
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/square_plot02.png' width="500" /></a>
 
 ## Análisis espacial
 ### 📈 sitios circulares
@@ -196,6 +197,7 @@ ggplot(pipse_nnss, aes(x,y))+
   geom_point(aes(colour = factor(NN1)))+
   theme_bw()
 ```
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/circle_plot01.png' width="500" /></a>
 
 ### 📈 Efecto de borde NN1 vs Tradicional
 En este ejemplo se utiliza la variable center_point que indica las coordenadas centrales del sitio de muestreo.
@@ -219,6 +221,7 @@ ggplot(pipse_cplot1n, aes(x = xc, y = yc)) +
   theme_bw() +
   theme_minimal()
 ```
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/circle_plot.png' width="500" /></a>
 
 ---
 
