@@ -47,7 +47,7 @@ head(pipse_azimuth)
 ## 6  P01 PIPSE 31.3 12.2  61.43844  1.977114
 ```
 
-### Diversidad de especies
+## Diversidad de especies
 El cálculo de índices de diversidad en sitios individuales se puede llevar a cabo siguiendo el estándar de la programación en R. Por ejemplo, para calcular el índice de entropía de Shannon se puede utilizar la función `shannon`.
 ```r
 shannon(pipse_azimuth$sp)
@@ -63,7 +63,7 @@ simpson(pipse_azimuth$sp)
 [1] 0.2862
 ```
 
-### Composición de especies
+## Composición de especies
 
 ```r
 data("pipse_cplot")
@@ -123,7 +123,7 @@ coord_xy(azi = 180, dis = 2, r = 17.84*2)
 ##       x     y
 ## 1 17.84 15.84
 ```
-## 📈 Ejemplos con dplyr
+### 📈 Ejemplos con dplyr
 utilizando la función mutate de la librería dplyr.
 ```r
 require(dplyr)
@@ -139,7 +139,7 @@ head(pipse_xy)
 ## 5  P01 PIPSE  8.0  6.4  63.67683  3.653111 21.1143096 19.45991
 ## 6  P01 PIPSE 31.3 12.2  61.43844  1.977114 19.5765068 18.78526
 ```
-## 📈 Distrubución espacial con ggplot
+### 📈 Distrubución espacial con ggplot
 Ahora, estos datos los podemos graficar con la librería ggplot2 para revisar su distribución espacial.
 ```r
 require(ggplot2)
@@ -155,8 +155,8 @@ ggplot(pipse_xy, aes(x = x, y = y))+
   coord_fixed()
 ```
 
-### Análisis espacial
-## 📈 sitios circulares
+## Análisis espacial
+### 📈 sitios circulares
 A continuación se muestra un ejemplo del cálculo de los índices de vecindad con la función nnss_circle. 
 Esta función se aplica solamente a sitios circulares y requiere de conocer el radio del sitio. En el ejemplo se 
 muestra un sitio de 1000 metros cuadrados con radio de 17.84.
@@ -194,7 +194,7 @@ ggplot(pipse_nnss, aes(x,y))+
   theme_bw()
 ```
 
-## 📈 Efecto de borde NN1 vs Tradicional
+### 📈 Efecto de borde NN1 vs Tradicional
 En este ejemplo se utiliza la variable center_point que indica las coordenadas centrales del sitio de muestreo.
 Esto es útil para sitios con coordenadas centrales diferentes al radio.
 ```r
@@ -216,9 +216,6 @@ ggplot(pipse_cplot1n, aes(x = xc, y = yc)) +
   theme_bw() +
   theme_minimal()
 ```
-
-
-
 
 ---
 
