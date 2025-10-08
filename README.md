@@ -147,6 +147,9 @@ ggplot(pipse_xy, aes(x = x, y = y))+
   geom_point()+
   coord_fixed()
 ```
+
+<a><img src='man/figures/square_plot01.png' width="200" /></a>
+
 Incluso se pueden hacer modificaciones para colorear con base en la especie y escalar con el diámetro.
 
 ```r
