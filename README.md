@@ -148,7 +148,7 @@ ggplot(pipse_xy, aes(x = x, y = y))+
   coord_fixed()
 ```
 
-# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/square_plot01.png' align="right" width="200" /></a>
+# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/square_plot01.png' width="400" /></a>
 
 Incluso se pueden hacer modificaciones para colorear con base en la especie y escalar con el diámetro.
 
