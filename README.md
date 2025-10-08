@@ -221,7 +221,7 @@ ggplot(pipse_cplot1n, aes(x = xc, y = yc)) +
   theme_bw() +
   theme_minimal()
 ```
-# ForestSDC  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/circle_plot.png' width="500" /></a>
+#  <a href='https://github.com/rubio-e/ForestSDC'><img src='man/figures/circle_plot.png' width="500" /></a>
 
 ---
 
