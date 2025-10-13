@@ -119,5 +119,5 @@ nnss_circle <- function(x, y, sp, d, h, r, data = NULL, center_point = NULL) {
   numeric_cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")
   nnss_results[numeric_cols] <- lapply(nnss_results[numeric_cols], as.numeric)
 
-  return(nnss_results)
+  return(cbind(sp = data1$sp, nnss_results))
 }
