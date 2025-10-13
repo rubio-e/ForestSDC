@@ -4,10 +4,10 @@
 \alias{rich}
 \title{Calculate Species Richness (S)}
 \usage{
-rich(x)
+rich(sp)
 }
 \arguments{
-\item{x}{Numeric or factor variable. A vector representing species or categories.}
+\item{sp}{Numeric or factor variable. A vector representing species or categories.}
 }
 \value{
 Numeric. The species richness (\eqn{S}).

@@ -4,14 +4,14 @@
 \alias{BALMOD}
 \title{BALMOD Competition Index}
 \usage{
-BALMOD(x, y, z)
+BALMOD(d, h, ps)
 }
 \arguments{
-\item{x}{A numeric vector representing the diameters of the trees in cm.}
+\item{d}{A numeric vector representing the diameters of the trees in cm.}
 
-\item{y}{A numeric vector representing the heights of the trees in meters.}
+\item{h}{A numeric vector representing the heights of the trees in meters.}
 
-\item{z}{A numeric variable representing the plot area in square meters.}
+\item{ps}{A numeric variable representing the plot area in square meters.}
 }
 \value{
 A numeric vector containing the BALMOD index for each tree.
@@ -37,8 +37,7 @@ where:
 \examples{
 x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10) # Tree diameters in cm
 y <- c(12, 23, 33, 45, 43, 22, 31, 32, 13, 11) # Tree heights in meters
-z <- 400 # Plot area in square meters
 
-BALMOD(x, y, z) # Calculate BALMOD index
+BALMOD(d = x, h = y, ps = 400) # Calculate BALMOD index
 
 }

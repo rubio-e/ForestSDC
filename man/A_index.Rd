@@ -4,12 +4,12 @@
 \alias{A_index}
 \title{Species Profile Index A}
 \usage{
-A_index(x, y)
+A_index(h, sp)
 }
 \arguments{
-\item{x}{A numeric vector representing tree heights.}
+\item{h}{A numeric vector representing tree heights.}
 
-\item{y}{A character or factor vector representing species corresponding to each tree height.}
+\item{sp}{A character or factor vector representing species corresponding to each tree height.}
 }
 \value{
 A numeric value representing the Species Profile Index A.
@@ -37,12 +37,10 @@ The Species Profile Index A is the sum of the profile indices across all three z
 \deqn{A = PI_1 + PI_2 + PI_3}
 }
 \examples{
-x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
-y <- c(
-  "P. patula", "P. patula", "P. patula", "A. religiosa", "Q. castanea",
-  "P. patula", "P. patula", "P. patula", "P. patula", "P. patula"
-)
-A_index(x, y)
+
+data(pipse_azimuth)
+
+A_index(h = pipse_azimuth$h, sp = pipse_azimuth$sp)
 
 }
 \references{

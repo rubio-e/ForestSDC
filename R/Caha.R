@@ -7,21 +7,22 @@
 #' where \eqn{cw} is the crown diameter in m.
 #' The total crown area is then scaled to a per-hectare value using the specified plot area.
 #'
-#' @param x Numeric vector. Tree crown diameters (in meters).
-#' @param y Numeric. Total plot area (in square meters).
+#' @param cw Numeric vector. Tree crown diameters (in meters).
+#' @param ps Numeric. Total plot area (in square meters).
 #'
 #' @return Numeric. Crown area cover per hectare (in square meters).
 #'
 #' @examples
 #' # Example crown diameters and plot area
 #' x <- c(10, 8, 6, 8, 5, 7, 2, 3, 11, 10)
-#' y <- 1000
 #'
 #' # Calculate crown area cover per hectare
-#' Caha(x, y)
+#' Caha(x, 400)
 #'
 #' @export
-Caha <- function(x, y) {
+Caha <- function(cw, ps) {
+  x <- cw
+  y <- ps
   # Validate inputs
   if (!is.numeric(x) || !is.numeric(y)) {
     stop("Both 'x' and 'y' must be numeric.")

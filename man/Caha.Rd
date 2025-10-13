@@ -4,12 +4,12 @@
 \alias{Caha}
 \title{Calculate Crown Area Cover per Hectare}
 \usage{
-Caha(x, y)
+Caha(cw, ps)
 }
 \arguments{
-\item{x}{Numeric vector. Tree crown diameters (in meters).}
+\item{cw}{Numeric vector. Tree crown diameters (in meters).}
 
-\item{y}{Numeric. Total plot area (in square meters).}
+\item{ps}{Numeric. Total plot area (in square meters).}
 }
 \value{
 Numeric. Crown area cover per hectare (in square meters).
@@ -25,9 +25,8 @@ The total crown area is then scaled to a per-hectare value using the specified p
 \examples{
 # Example crown diameters and plot area
 x <- c(10, 8, 6, 8, 5, 7, 2, 3, 11, 10)
-y <- 1000
 
 # Calculate crown area cover per hectare
-Caha(x, y)
+Caha(x, 400)
 
 }

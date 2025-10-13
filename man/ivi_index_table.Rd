@@ -4,7 +4,7 @@
 \alias{ivi_index_table}
 \title{Calculate IVI Index Table}
 \usage{
-ivi_index_table(sp, x, plot, data = NULL, plot_area)
+ivi_index_table(sp, x, plot, data = NULL, ps)
 }
 \arguments{
 \item{sp}{A column in `data` indicating species names.}
@@ -15,7 +15,7 @@ ivi_index_table(sp, x, plot, data = NULL, plot_area)
 
 \item{data}{A data frame containing all the input columns.}
 
-\item{plot_area}{Numeric value representing the area of the individual plots (e.g., 10000 m²).}
+\item{ps}{Numeric value representing the area of the individual plots (e.g., 10000 m²).}
 }
 \value{
 A data frame with species-wise IVI metrics: Abundance, Dominance, Frequency, and IVI.
@@ -27,5 +27,7 @@ compute the species frequency based on the number of plots. So it is recommended
 per area and not just for individual plots.
 }
 \examples{
-# ivi_index_table(sp, x, plot, data = mydata, plot_area = 400)
+data("pipse_cplot")
+ivi_index_table(sp = sp, x = ca, plot = plot, data = pipse_cplot, ps = 1000)
+
 }

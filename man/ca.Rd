@@ -4,12 +4,12 @@
 \alias{ca}
 \title{Individual Tree Crown Area}
 \usage{
-ca(x, y)
+ca(cw_a, cw_b)
 }
 \arguments{
-\item{x}{A numeric variable representing the first tree crown diameter in meters.}
+\item{cw_a}{A numeric variable representing the first tree crown diameter in meters.}
 
-\item{y}{A numeric variable representing the second tree crown diameter in meters.}
+\item{cw_b}{A numeric variable representing the second tree crown diameter in meters.}
 }
 \value{
 A numeric variable representing the tree crown area in square meters.
@@ -20,7 +20,6 @@ measurements of its crown diameters. The crown area is computed using the
 average of the two diameters and is assumed to be circular.
 }
 \examples{
-# Calculate the crown area for two crown diameters of 10 m and 15 m
 crown_area <- ca(10, 15)
 crown_area # Output: Area in square meters
 

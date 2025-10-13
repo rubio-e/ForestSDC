@@ -4,12 +4,12 @@
 \alias{dom_trees}
 \title{Identify Dominant Trees in a Plot Area}
 \usage{
-dom_trees(x, y)
+dom_trees(d, ps)
 }
 \arguments{
-\item{x}{Numeric vector. A vector of tree diameters measured in centimeters.}
+\item{d}{Numeric vector. A vector of tree diameters measured in centimeters.}
 
-\item{y}{Numeric variable. The total plot area in square meters.}
+\item{ps}{Numeric variable. The total plot area in square meters.}
 }
 \value{
 Character vector. A vector of the same length as `x`, where each entry is labeled
@@ -24,10 +24,7 @@ as those whose diameters fall within the top 100 in the given plot area.
 # Example tree diameters
 x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
 
-# Specify the plot area
-y <- 1000
-
 # Identify dominant trees
-dom_trees(x, y)
+dom_trees(x, 1000)
 
 }

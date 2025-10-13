@@ -4,10 +4,10 @@
 \alias{simpson}
 \title{Simpson's index.}
 \usage{
-simpson(x)
+simpson(sp)
 }
 \arguments{
-\item{x}{Numeric or factor variable}
+\item{sp}{Numeric or factor variable}
 }
 \value{
 Numeric variable.

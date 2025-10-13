@@ -4,10 +4,10 @@
 \alias{simpson_complement}
 \title{Simpson's Index Complement}
 \usage{
-simpson_complement(x)
+simpson_complement(sp)
 }
 \arguments{
-\item{x}{A numeric or factor vector representing categories (e.g., species or groups).}
+\item{sp}{A numeric or factor vector representing categories (e.g., species or groups).}
 }
 \value{
 A numeric value representing the complement of Simpson's index (\eqn{D'}).

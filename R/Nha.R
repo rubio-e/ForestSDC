@@ -9,8 +9,8 @@
 #' - \eqn{N_{\text{trees}}} is the total number of trees in the sample,
 #' - \eqn{A} is the plot area in square meters.
 #' @md
-#' @param x A numeric or character vector representing tree diameter or other tree attribute.
-#' @param y A numeric variable representing the plot area in square meters.
+#' @param d A numeric or character vector representing tree diameter or other tree attribute.
+#' @param ps A numeric variable representing the plot area in square meters.
 #'
 #' @return A numeric value representing the number of trees per hectare.
 #'
@@ -20,7 +20,9 @@
 #' Nha(x, y)
 #'
 #' @export
-Nha <- function(x, y) {
+Nha <- function(d, ps) {
+  x <- d
+  y <- ps
   # Calculate the total number of trees in the plot
   num_trees <- length(x)
 

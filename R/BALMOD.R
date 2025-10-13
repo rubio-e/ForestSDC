@@ -14,21 +14,23 @@
 #' - \eqn{N} is the total number of trees in the plot,
 #' - \eqn{h_{\text{dom}}} is the dominant height, defined as the mean height of the tallest trees.
 #' @md
-#' @param x A numeric vector representing the diameters of the trees in cm.
-#' @param y A numeric vector representing the heights of the trees in meters.
-#' @param z A numeric variable representing the plot area in square meters.
+#' @param d A numeric vector representing the diameters of the trees in cm.
+#' @param h A numeric vector representing the heights of the trees in meters.
+#' @param ps A numeric variable representing the plot area in square meters.
 #'
 #' @return A numeric vector containing the BALMOD index for each tree.
 #'
 #' @examples
 #' x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10) # Tree diameters in cm
 #' y <- c(12, 23, 33, 45, 43, 22, 31, 32, 13, 11) # Tree heights in meters
-#' z <- 400 # Plot area in square meters
 #'
-#' BALMOD(x, y, z) # Calculate BALMOD index
+#' BALMOD(d = x, h = y, ps = 400) # Calculate BALMOD index
 #'
 #' @export
-BALMOD <- function(x, y, z) {
+BALMOD <- function(d, h, ps) {
+  x <- d
+  y <- h
+  z <- ps
   # Calculate the proportion of basal area
   pi <- (bal(x, z) / Gha(x, z))
 

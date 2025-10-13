@@ -4,10 +4,10 @@
 \alias{A_max}
 \title{Maximum Value for the Species Profile Index A}
 \usage{
-A_max(x)
+A_max(sp)
 }
 \arguments{
-\item{x}{A character or factor vector representing species.}
+\item{sp}{A character or factor vector representing species.}
 }
 \value{
 A numeric value representing the maximum possible Species Profile Index A.
@@ -18,10 +18,9 @@ based on the number of distinct species present. It assumes that each species is
 across the three height zones.
 }
 \examples{
-x <- c(
-  "P. patula", "P. patula", "P. patula", "A. religiosa", "Q. castanea",
-  "P. patula", "P. patula", "P. patula", "P. patula", "P. patula"
-)
-A_max(x)
+
+#' data(pipse_azimuth)
+
+A_max(sp = pipse_azimuth$sp)
 
 }

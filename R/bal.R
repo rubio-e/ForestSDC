@@ -11,18 +11,21 @@
 #' - \eqn{BA_j} is the basal area of a competing tree larger than \eqn{BA_i}.
 #' - \eqn{A} is the plot area in square meters.
 #' @md
-#' @param x Numeric vector. Diameters of the subject trees in cm.
-#' @param y Numeric. Plot area in square meters.
+#' @param d Numeric vector. Diameters of the subject trees in cm.
+#' @param ps Numeric. Plot area in square meters.
 #'
 #' @return Numeric vector. The BAL values for each tree in `x`.
 #'
 #' @examples
-#' x <- c(30, 20, 20, 35, 65) # Tree diameters in cm
-#' bal_result <- bal(x, 400) # Calculate BAL for a plot area of 400 square meters
-#' bal_result
+#'
+#' data(pipse_azimuth)
+#'
+#' bal(d = pipse_azimuth$d, ps = 400)
 #'
 #' @export
-bal <- function(x, y) {
+bal <- function(d, ps) {
+  x <- d
+  y <- ps
   # Validate inputs
   if (!is.numeric(x) || !is.numeric(y)) {
     stop("Both 'x' and 'y' must be numeric.")

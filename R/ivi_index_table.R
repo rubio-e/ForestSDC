@@ -9,15 +9,17 @@
 #' @param x A numeric column used for dominance calculation (e.g., basal area or crown area).
 #' @param plot A factor or character column indicating plot identifiers.
 #' @param data A data frame containing all the input columns.
-#' @param plot_area Numeric value representing the area of the individual plots (e.g., 10000 m²).
+#' @param ps Numeric value representing the area of the individual plots (e.g., 10000 m²).
 #'
 #' @return A data frame with species-wise IVI metrics: Abundance, Dominance, Frequency, and IVI.
 #' @export
 #'
 #' @examples
-#' # ivi_index_table(sp, x, plot, data = mydata, plot_area = 400)
-ivi_index_table <- function(sp, x, plot, data = NULL, plot_area) {
-
+#' data("pipse_cplot")
+#' ivi_index_table(sp = sp, x = ca, plot = plot, data = pipse_cplot, ps = 1000)
+#'
+ivi_index_table <- function(sp, x, plot, data = NULL, ps) {
+  plot_area <- ps
   if (is.null(data)) {
     if (length(unique(c(length(plot), length(sp), length(x)))) > 1) {
       stop("All input vectors (plot, sp, xha) must have the same length.")

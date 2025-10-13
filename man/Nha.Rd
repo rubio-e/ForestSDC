@@ -4,12 +4,12 @@
 \alias{Nha}
 \title{Number of Trees per Hectare}
 \usage{
-Nha(x, y)
+Nha(d, ps)
 }
 \arguments{
-\item{x}{A numeric or character vector representing tree diameter or other tree attribute.}
+\item{d}{A numeric or character vector representing tree diameter or other tree attribute.}
 
-\item{y}{A numeric variable representing the plot area in square meters.}
+\item{ps}{A numeric variable representing the plot area in square meters.}
 }
 \value{
 A numeric value representing the number of trees per hectare.

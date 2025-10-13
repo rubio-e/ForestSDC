@@ -5,22 +5,21 @@
 #' possible diversity for a given set of species. The relative value is expressed
 #' as a percentage.
 #'
-#' @param x A numeric vector representing tree heights.
-#' @param y A character or factor vector representing species.
+#' @param h A numeric vector representing tree heights.
+#' @param sp A character or factor vector representing species.
 #'
 #' @return A numeric value representing the relative Species Profile Index A (as a percentage).
 #'
 #' @examples
-#' x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
-#' y <- c(
-#'   "P. patula", "P. patula", "P. patula", "A. religiosa",
-#'   "Q. castanea", "P. patula", "P. patula", "P. patula",
-#'   "P. patula", "P. patula"
-#' )
-#' A_rel(x, y)
+#'
+#' data(pipse_azimuth)
+#'
+#' A_rel(h = pipse_azimuth$h, sp = pipse_azimuth$sp)
 #'
 #' @export
-A_rel <- function(x, y) {
+A_rel <- function(h, sp) {
+  x <- h
+  y <- sp
   A_rel_value <- (A_index(x, y) / A_max(y)) * 100
   return(A_rel_value)
 }

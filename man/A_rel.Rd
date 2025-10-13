@@ -4,12 +4,12 @@
 \alias{A_rel}
 \title{Relative Value for the Species Profile Index A}
 \usage{
-A_rel(x, y)
+A_rel(h, sp)
 }
 \arguments{
-\item{x}{A numeric vector representing tree heights.}
+\item{h}{A numeric vector representing tree heights.}
 
-\item{y}{A character or factor vector representing species.}
+\item{sp}{A character or factor vector representing species.}
 }
 \value{
 A numeric value representing the relative Species Profile Index A (as a percentage).
@@ -21,12 +21,9 @@ possible diversity for a given set of species. The relative value is expressed
 as a percentage.
 }
 \examples{
-x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
-y <- c(
-  "P. patula", "P. patula", "P. patula", "A. religiosa",
-  "Q. castanea", "P. patula", "P. patula", "P. patula",
-  "P. patula", "P. patula"
-)
-A_rel(x, y)
+
+data(pipse_azimuth)
+
+A_rel(h = pipse_azimuth$h, sp = pipse_azimuth$sp)
 
 }

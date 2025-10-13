@@ -4,10 +4,10 @@
 \alias{shannon}
 \title{Shannon's Entropy Index}
 \usage{
-shannon(x)
+shannon(sp)
 }
 \arguments{
-\item{x}{A numeric or factor vector representing categories (e.g., species or groups).}
+\item{sp}{A numeric or factor vector representing categories (e.g., species or groups).}
 }
 \value{
 A numeric value representing Shannon's entropy index (\eqn{H'}).

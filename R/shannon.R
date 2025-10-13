@@ -11,7 +11,7 @@
 #' - \eqn{p_i} is the proportion of individuals belonging to the \eqn{i}-th category.
 #' - \eqn{S} is the total number of unique categories in the dataset.
 #' @md
-#' @param x A numeric or factor vector representing categories (e.g., species or groups).
+#' @param sp A numeric or factor vector representing categories (e.g., species or groups).
 #'
 #' @return A numeric value representing Shannon's entropy index (\eqn{H'}).
 #'
@@ -20,7 +20,8 @@
 #' shannon(x)
 #'
 #' @export
-shannon <- function(x) {
+shannon <- function(sp) {
+  x <- sp
   # Calculate the frequency of each category
   y <- table(x)
 

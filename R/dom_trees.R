@@ -4,8 +4,8 @@
 #' the 100 thickest trees based on their diameters. Dominant trees are classified
 #' as those whose diameters fall within the top 100 in the given plot area.
 #'
-#' @param x Numeric vector. A vector of tree diameters measured in centimeters.
-#' @param y Numeric variable. The total plot area in square meters.
+#' @param d Numeric vector. A vector of tree diameters measured in centimeters.
+#' @param ps Numeric variable. The total plot area in square meters.
 #'
 #' @return Character vector. A vector of the same length as `x`, where each entry is labeled
 #'         as "dom_tree" for dominant trees and "not_dom" for non-dominant trees.
@@ -14,14 +14,13 @@
 #' # Example tree diameters
 #' x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
 #'
-#' # Specify the plot area
-#' y <- 1000
-#'
 #' # Identify dominant trees
-#' dom_trees(x, y)
+#' dom_trees(x, 1000)
 #'
 #' @export
-dom_trees <- function(x, y) {
+dom_trees <- function(d, ps) {
+  x <- d
+  y <- ps
   # Validate inputs
   if (!is.numeric(x) || !is.numeric(y)) {
     stop("Both 'x' (tree diameters) and 'y' (plot area) must be numeric.")

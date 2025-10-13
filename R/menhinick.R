@@ -9,7 +9,7 @@
 #' - \eqn{S} is the number of unique species in the sample,
 #' - \eqn{N} is the total number of individuals in the sample.
 #' @md
-#' @param x A numeric or factor variable representing the species or individuals
+#' @param sp A numeric or factor variable representing the species or individuals
 #'          in a sample.
 #'
 #' @return A numeric value representing Menhinick's species richness index.
@@ -19,7 +19,8 @@
 #' menhinick(x)
 #'
 #' @export
-menhinick <- function(x) {
+menhinick <- function(sp) {
+  x <- sp
   # Calculate the number of unique species
   num_species <- length(unique(x))
 

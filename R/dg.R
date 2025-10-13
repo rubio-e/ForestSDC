@@ -12,7 +12,7 @@
 #' - \eqn{k} is a constant factor for conversion.
 #' - \eqn{n} is the number of trees.
 #'
-#' @param x Numeric vector. A vector of tree diameters (in centimeters).
+#' @param d Numeric vector. A vector of tree diameters (in centimeters).
 #'
 #' @return Numeric. The quadratic mean diameter (in centimeters).
 #'
@@ -24,7 +24,8 @@
 #' dg(x)
 #'
 #' @export
-dg <- function(x) {
+dg <- function(d) {
+  x <- d
   # Validate input
   if (!is.numeric(x)) {
     stop("'x' must be a numeric vector of tree diameters.")

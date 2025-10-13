@@ -11,7 +11,7 @@
 #' - \eqn{p_i} is the proportion of individuals in the \eqn{i}-th category,
 #' - \eqn{S} is the total number of categories.
 #' @md
-#' @param x A numeric or factor vector representing categories (e.g., species or groups).
+#' @param sp A numeric or factor vector representing categories (e.g., species or groups).
 #'
 #' @return A numeric value representing the complement of Simpson's index (\eqn{D'}).
 #'
@@ -20,7 +20,8 @@
 #' simpson_complement(x)
 #'
 #' @export
-simpson_complement <- function(x) {
+simpson_complement <- function(sp) {
+  x <- sp
   # Calculate the frequency of each category
   y <- table(x)
 

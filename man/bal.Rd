@@ -4,12 +4,12 @@
 \alias{bal}
 \title{Calculate Basal Area Larger Index (BAL)}
 \usage{
-bal(x, y)
+bal(d, ps)
 }
 \arguments{
-\item{x}{Numeric vector. Diameters of the subject trees in cm.}
+\item{d}{Numeric vector. Diameters of the subject trees in cm.}
 
-\item{y}{Numeric. Plot area in square meters.}
+\item{ps}{Numeric. Plot area in square meters.}
 }
 \value{
 Numeric vector. The BAL values for each tree in \code{x}.
@@ -30,8 +30,9 @@ where:
 }
 }
 \examples{
-x <- c(30, 20, 20, 35, 65) # Tree diameters in cm
-bal_result <- bal(x, 400) # Calculate BAL for a plot area of 400 square meters
-bal_result
+
+data(pipse_azimuth)
+
+bal(d = pipse_azimuth$d, ps = 400)
 
 }

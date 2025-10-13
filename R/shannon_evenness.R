@@ -13,7 +13,8 @@
 #' - \eqn{H_{\text{max}}} is the maximum Shannon index for a given number of unique species \eqn{S},
 #'   and is given by \eqn{H_{\text{max}} = \log(S)}.
 #' @md
-#' @param x A numeric or factor vector representing species or groups in the community.
+#'
+#' @param sp A numeric or factor vector representing species or groups in the community.
 #'
 #' @return A numeric value representing Shannon's evenness index, which ranges from 0 (uneven) to 1 (perfectly even).
 #'
@@ -22,7 +23,8 @@
 #' shannon_evenness(x)
 #'
 #' @export
-shannon_evenness <- function(x) {
+shannon_evenness <- function(sp) {
+  x <- sp
   # Calculate the relative abundance (proportion) of each category
   y <- table(x)
   yy <- y / sum(y) # Proportions of each category

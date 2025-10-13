@@ -4,10 +4,10 @@
 \alias{shannon_evenness}
 \title{Shannon's Evenness Index}
 \usage{
-shannon_evenness(x)
+shannon_evenness(sp)
 }
 \arguments{
-\item{x}{A numeric or factor vector representing species or groups in the community.}
+\item{sp}{A numeric or factor vector representing species or groups in the community.}
 }
 \value{
 A numeric value representing Shannon's evenness index, which ranges from 0 (uneven) to 1 (perfectly even).

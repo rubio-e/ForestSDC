@@ -4,10 +4,10 @@
 \alias{margalef}
 \title{Margalef's Species Richness Index}
 \usage{
-margalef(x)
+margalef(sp)
 }
 \arguments{
-\item{x}{A numeric or factor variable representing the species or individuals
+\item{sp}{A numeric or factor variable representing the species or individuals
 in a sample.}
 }
 \value{

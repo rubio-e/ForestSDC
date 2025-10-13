@@ -4,10 +4,10 @@
 \alias{dg}
 \title{Calculate Quadratic Mean Diameter (QMD)}
 \usage{
-dg(x)
+dg(d)
 }
 \arguments{
-\item{x}{Numeric vector. A vector of tree diameters (in centimeters).}
+\item{d}{Numeric vector. A vector of tree diameters (in centimeters).}
 }
 \value{
 Numeric. The quadratic mean diameter (in centimeters).

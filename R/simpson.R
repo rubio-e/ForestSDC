@@ -1,6 +1,6 @@
 #' Simpson's index.
 #'
-#' @param x Numeric or factor variable
+#' @param sp Numeric or factor variable
 #'
 #' @return Numeric variable.
 #'
@@ -10,7 +10,8 @@
 #'
 #' simpson(x)
 #' @export
-simpson <- function(x) {
+simpson <- function(sp) {
+  x <- sp
   y <- table(x)
   xx <- y / sum(y)
   xy <- sum(xx^2, na.rm = T)

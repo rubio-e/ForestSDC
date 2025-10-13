@@ -4,12 +4,12 @@
 \alias{sdi}
 \title{Calculate Stand Density Index (SDI)}
 \usage{
-sdi(x, y)
+sdi(d, ps)
 }
 \arguments{
-\item{x}{Numeric vector. A vector of tree diameters (e.g., in cm).}
+\item{d}{Numeric vector. A vector of tree diameters (e.g., in cm).}
 
-\item{y}{Numeric. The plot area (e.g., in square meters).}
+\item{ps}{Numeric. The plot area (e.g., in square meters).}
 }
 \value{
 Numeric. The stand density index.

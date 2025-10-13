@@ -6,7 +6,7 @@
 #' where:
 #' - \eqn{counts} represents the frequency of each unique species or category.
 #' @md
-#' @param x Numeric or factor variable. A vector representing species or categories.
+#' @param sp Numeric or factor variable. A vector representing species or categories.
 #'
 #' @return Numeric. The species richness (\eqn{S}).
 #'
@@ -15,7 +15,8 @@
 #' rich(x)
 #'
 #' @export
-rich <- function(x) {
+rich <- function(sp) {
+  x <- sp
   counts <- table(x)
   richness <- sum(counts > 0)
   return(richness)

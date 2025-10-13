@@ -18,19 +18,21 @@
 #' @references
 #' Pretzsch, H. (2009). Forest Dynamics, Growth and Yield: From Measurement to Model. Springer-Verlag. https://doi.org/10.1007/978-3-540-88307-4
 #' @md
-#' @param x A numeric vector representing tree heights.
-#' @param y A character or factor vector representing species corresponding to each tree height.
+#' @param h A numeric vector representing tree heights.
+#' @param sp A character or factor vector representing species corresponding to each tree height.
 #' @return A numeric value representing the Species Profile Index A.
 #'
 #' @examples
 #'
 #' data(pipse_azimuth)
 #'
-#' A_index(x = pipse_azimuth$h, y = pipse_azimuth$sp)
+#' A_index(h = pipse_azimuth$h, sp = pipse_azimuth$sp)
 #'
 #' @export
-A_index <- function(x, y) {
+A_index <- function(h, sp) {
   # Normalize heights to percentage of the maximum height
+  x <- h
+  y <- sp
   hmax <- (x / max(x)) * 100
   hmax_df <- data.frame(species = y, height = x, hmax = hmax)
 
