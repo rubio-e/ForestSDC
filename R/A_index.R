@@ -23,12 +23,10 @@
 #' @return A numeric value representing the Species Profile Index A.
 #'
 #' @examples
-#' x <- c(10, 20, 30, 40, 50, 25, 30, 22, 11, 10)
-#' y <- c(
-#'   "P. patula", "P. patula", "P. patula", "A. religiosa", "Q. castanea",
-#'   "P. patula", "P. patula", "P. patula", "P. patula", "P. patula"
-#' )
-#' A_index(x, y)
+#'
+#' data(pipse_azimuth)
+#'
+#' A_index(x = pipse_azimuth$h, y = pipse_azimuth$sp)
 #'
 #' @export
 A_index <- function(x, y) {
