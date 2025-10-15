@@ -13,7 +13,7 @@
 #' crown_area <- ca(10, 15)
 #' crown_area # Output: Area in square meters
 #'
-#' @export
+#' @keywords internal
 ca <- function(cw_a, cw_b) {
   x <- cw_a
   y <- cw_b
