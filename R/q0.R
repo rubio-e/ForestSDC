@@ -12,10 +12,10 @@
 #'
 #' @examples
 #' x <- c("n", "m", "n", "n", "m")
-#' rich(x)
+#' q0(x)
 #'
-#' @keywords internal
-rich <- function(sp) {
+#' @export
+q0 <- function(sp) {
   x <- sp
   counts <- table(x)
   richness <- sum(counts > 0)
