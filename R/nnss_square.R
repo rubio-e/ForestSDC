@@ -26,16 +26,13 @@
 #' @md
 #'
 #' @examples
-#' set.seed(42)
-#' x <- runif(100, min = 1, max = 50)
-#' y <- runif(100, min = 1, max = 50)
-#' sp <- factor(sample(c("Pinus", "Quercus"), 100, replace = TRUE))
-#' d <- runif(100, min = 7.5, max = 60)
-#' h <- 5.4349 + d * 0.4219
-#' plot <- rep("P01", 100)
-#' dataP01 <- data.frame(plot, x, y, sp, d, h)
-#' nnss_square(x = x, y = y, sp = sp, d = d,
-#' h = h, xr = cbind(0,50), yr = cbind(0,50), data = dataP01)
+#'
+#' data("pipse_one")
+#'
+#' nnss_test <- nnss_square(x = x, y = y, sp = sp, d = d,
+#' h = h, xr = cbind(0,50), yr = cbind(0,50), data = pipse_one)
+#'
+#' head(nnss_test)
 #'
 #' @export
 nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
@@ -104,13 +101,13 @@ nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
       ))
 
     # Separate the calculated indices into individual columns
-    nnew <- nnss_alli |>
+    nnss_results <- nnss_alli |>
       tidyr::separate(col = "df_nnss", into = c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1"), sep = ";")
 
     # Convert the new columns to numeric
     cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")
-    nnew[cols] <- lapply(nnew[cols], as.numeric)
+    nnss_results[cols] <- lapply(nnss_results[cols], as.numeric)
 
-    return(nnew)
+    return(nnss_results[,c("xc","yc","sp","d","h","Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")])
   }
 }

@@ -12,7 +12,8 @@
 #' @param sp A factor or character vector representing tree species.
 #' @param r A numeric value representing the radius of the circular plot (must be positive).
 #' @param data A data frame containing all the required columns (`plot`, `x`, `y`, `sp`, `d`, `h`).
-#' @param center_point a vector including the center coordinates of the plots.
+#' @param center_point Optional numeric vector including the center coordinates of the plots (cbind(17.84,17.84)).
+#'
 #'
 #' @return A data frame with calculated nearest neighbor indices for each tree.
 #' Columns include:
@@ -27,7 +28,7 @@
 #'
 #' @examples
 #'
-#' data(pipse_azimuth)
+#' data("pipse_azimuth")
 #'
 #' require(dplyr)
 #'
@@ -35,7 +36,8 @@
 #' pipse_azimuth %>%
 #' mutate(coord_xy(azi = azimuth,dis = distance, r = 17.84*2))
 #'
-#' nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
+#' df_nnss <- nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
+#' head(df_nnss)
 #'
 #' @export
 nnss_circle <- function(x, y, sp, d, h, r, data = NULL, center_point = NULL) {
@@ -118,6 +120,6 @@ nnss_circle <- function(x, y, sp, d, h, r, data = NULL, center_point = NULL) {
   # Convert calculated columns to numeric
   numeric_cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")
   nnss_results[numeric_cols] <- lapply(nnss_results[numeric_cols], as.numeric)
-
-  return(cbind(sp = data1$sp, nnss_results))
+  # nnss_result <- cbind(sp = data1$sp, nnss_results)
+  return(nnss_results[,c("xc","yc","sp","d","h","Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")])
 }

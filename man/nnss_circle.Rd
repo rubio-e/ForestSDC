@@ -21,7 +21,7 @@ nnss_circle(x, y, sp, d, h, r, data = NULL, center_point = NULL)
 
 \item{data}{A data frame containing all the required columns (\code{plot}, \code{x}, \code{y}, \code{sp}, \code{d}, \code{h}).}
 
-\item{center_point}{a vector including the center coordinates of the plots.}
+\item{center_point}{Optional numeric vector including the center coordinates of the plots (cbind(17.84,17.84)).}
 }
 \value{
 A data frame with calculated nearest neighbor indices for each tree.
@@ -43,7 +43,7 @@ several indices related to tree competition and spacing.
 }
 \examples{
 
-data(pipse_azimuth)
+data("pipse_azimuth")
 
 require(dplyr)
 
@@ -51,6 +51,7 @@ pipse_xy <-
 pipse_azimuth \%>\%
 mutate(coord_xy(azi = azimuth,dis = distance, r = 17.84*2))
 
-nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
+df_nnss <- nnss_circle(x = x, y = y, sp = sp, d = d, h = h, r = 17.84, data = pipse_xy)
+head(df_nnss)
 
 }
