@@ -28,7 +28,7 @@ devtools::install_github("rubio-e/ForestSDC",
                          dependencies = TRUE,
                          upgrade = "always",
                          build_vignettes = FALSE,
-                         force = TRUE)  # Use force if reinstalling
+                         force = TRUE)  # Usar force para reinstalar
 ```
 
 ## Uso básico de ForestSDC
