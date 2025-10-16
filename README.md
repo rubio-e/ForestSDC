@@ -20,11 +20,15 @@
 ## Instalación
 
 ```r
-# Instala devtools si no lo tienes
-install.packages("devtools")
+# El siguiente código instala devtools si no está instalado en el equipo
+if (!require(devtools)) install.packages("devtools")
 
-# Instala ForestSDC desde GitHub
-devtools::install_github("rubio-e/ForestSDC")
+# Instala ForestSDC desde GitHub e incluye todas sus Dependencias
+devtools::install_github("rubio-e/ForestSDC",
+                         dependencies = TRUE,
+                         upgrade = "always",
+                         build_vignettes = FALSE,
+                         force = TRUE)  # Use force if reinstalling
 ```
 
 ## Uso básico de ForestSDC
