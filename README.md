@@ -36,8 +36,7 @@ La librería cuenta con bases de datos reales que pueden ser utilizados para pra
 
 ```r
 library(ForestSDC)
-# Cálculo del índice de Shannon
-library(ForestSDC)
+# Carga la base de datos
 data("pipse_azimuth")
 head(pipse_azimuth)
 ```
@@ -54,6 +53,7 @@ head(pipse_azimuth)
 ## Diversidad de especies
 El cálculo de índices de diversidad en sitios individuales se puede llevar a cabo siguiendo el estándar de la programación en R. Por ejemplo, para calcular el índice de entropía de Shannon se puede utilizar la función `shannon`.
 ```r
+# Cálculo del índice de Shannon
 shannon(pipse_azimuth$sp)
 [1] 1.542215
 ```
