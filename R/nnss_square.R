@@ -30,50 +30,48 @@
 #' data("pipse_one")
 #'
 #' nnss_test <- nnss_square(x = x, y = y, sp = sp, d = d,
-#' h = h, xr = cbind(0,50), yr = cbind(0,50), data = pipse_one)
+#' h = h, xr = c(0,50), yr = c(0,50), data = pipse_one)
 #'
 #' head(nnss_test)
 #'
 #' @export
 nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
-  # Validate input
+
+  x_min <- xr[1]
+  x_max <- xr[2]
+  y_min <- yr[1]
+  y_max <- yr[2]
+
   if (is.null(data)) {
     if (length(unique(c(length(x), length(y), length(sp), length(d), length(h)))) > 1) {
-      stop("All input vectors (plot, x, y, sp, d, h) must have the same length.")
+      stop("All input vectors (x, y, sp, d, h) must have the same length.")
     }
     data1 <-
       data.frame(
-        # plot = plot,
         x = x,
         y = y,
-        xc = x-xr[,1],
-        yc = y-yr[,1],
+        xc = x - x_min,
+        yc = y - y_min,
         sp = sp,
         d = d,
         h = h
       )
   } else {
-    # required_cols <- c("plot", "x", "y", "sp", "d", "h")
-    # if (!all(required_cols %in% colnames(data))) {
-    #   stop("The data frame must contain the columns: plot, x, y, sp, d, h.")
-    # }
-    # plot <- deparse(substitute(plot))
-    x <- deparse(substitute(x))
-    y <- deparse(substitute(y))
-    sp <- deparse(substitute(sp))
-    d <- deparse(substitute(d))
-    h <- deparse(substitute(h))
+    x_col  <- as.character(substitute(x))
+    y_col  <- as.character(substitute(y))
+    sp_col <- as.character(substitute(sp))
+    d_col  <- as.character(substitute(d))
+    h_col  <- as.character(substitute(h))
 
     data1 <-
       data.frame(
-        # plot = data[[plot]],
-        x = data[[x]],
-        y = data[[y]],
-        xc = data[[x]]-xr[,1],
-        yc = data[[y]]-yr[,1],
-        sp = data[[sp]],
-        d = data[[d]],
-        h = data[[h]]
+        x = data[[x_col]],
+        y = data[[y_col]],
+        xc = data[[x_col]] - x_min,
+        yc = data[[y_col]] - y_min,
+        sp = data[[sp_col]],
+        d = data[[d_col]],
+        h = data[[h_col]]
       )
   }
 
@@ -87,17 +85,16 @@ nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
     warning("Duplicated rows found in the data. These rows will be returned for review.")
     return(data_duplicated)
   } else {
-    # Calculate Nearest Neighbor indices using an external function `nnss5q`
+    # Calculate Nearest Neighbor indices using your external function `nnss5q`
     nnss_alli <- data1 |>
-      # dplyr::group_by(plot) |>
       dplyr::mutate(df_nnss = nnss5q(
         x = data1$xc,
         y = data1$yc,
-        sp = sp,
-        d = d,
-        h = h,
-        xmax = xr[,2]-xr[,1],
-        ymax = yr[,2]-yr[,1]
+        sp = data1$sp,
+        d = data1$d,
+        h = data1$h,
+        xmax = x_max - x_min,
+        ymax = y_max - y_min
       ))
 
     # Separate the calculated indices into individual columns
@@ -108,6 +105,6 @@ nnss_square <- function(x, y, sp, d, h, xr, yr, data = NULL) {
     cols <- c("Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")
     nnss_results[cols] <- lapply(nnss_results[cols], as.numeric)
 
-    return(nnss_results[,c("xc","yc","sp","d","h","Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")])
+    return(nnss_results[, c("xc", "yc", "sp", "d", "h", "Ui", "Mi", "dDomi", "hDomi", "dDif", "hDif", "NN1")])
   }
 }
